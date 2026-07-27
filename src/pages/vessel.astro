@@ -1,88 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import VesselMap from "../components/VesselMap";
-import { allEvents } from "../lib/events";
-import { getEventLink } from "../lib/event-routes";
 
-// ── Calendar: Vessel-only events + recurring Thu/Sat Open Labs ─
-type CalEntry = {
-  date: string;
-  title: string;
-  href: string;
-  type: "openlab" | "event";
-};
-
-const pad = (n: number) => String(n).padStart(2, "0");
-const isoOf = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-const today = new Date();
-const todayISO = isoOf(today);
-
-// Any event held at The Vessel — matched on id, title, or description text.
-const isVesselEvent = (e: typeof allEvents[number]) => {
-  const blob = `${e.id} ${e.title} ${e.description}`.toLowerCase();
-  return blob.includes("vessel") || blob.includes("openlab");
-};
-
-const vesselEventHref = (e: typeof allEvents[number]) => e.link ?? getEventLink(e.id, "/vessel");
-
-const monthAnchor = {
-  label: today.toLocaleDateString("en-US", { month: "long", year: "numeric" }),
-  year: today.getFullYear(),
-  month: today.getMonth(),
-};
-
-const buildMonth = (year: number, month: number) => {
-  const last = new Date(year, month + 1, 0);
-  const daysInMonth = last.getDate();
-  const startWeekday = (new Date(year, month, 1).getDay() + 6) % 7; // Mon-first
-
-  const byDate = new Map<string, CalEntry[]>();
-  const push = (entry: CalEntry) => {
-    const arr = byDate.get(entry.date) ?? [];
-    arr.push(entry);
-    byDate.set(entry.date, arr);
-  };
-
-  for (const e of allEvents) {
-    if (!e.date.startsWith(`${year}-${pad(month + 1)}`)) continue;
-    if (!isVesselEvent(e)) continue;
-    push({ date: e.date, title: e.title, href: vesselEventHref(e), type: "event" });
-  }
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const d = new Date(year, month, day);
-    const dow = d.getDay();
-    if (dow === 4 || dow === 6) {
-      push({ date: isoOf(d), title: "Open Lab", href: "https://discord.gg/m5Hknymurb", type: "openlab" });
-    }
-  }
-
-  const cells: { day: number | null; entries: CalEntry[]; isToday: boolean; isPast: boolean }[] = [];
-  for (let i = 0; i < startWeekday; i++) cells.push({ day: null, entries: [], isToday: false, isPast: false });
-  for (let day = 1; day <= daysInMonth; day++) {
-    const date = `${year}-${pad(month + 1)}-${pad(day)}`;
-    cells.push({
-      day,
-      entries: byDate.get(date) ?? [],
-      isToday: date === todayISO,
-      isPast: date < todayISO,
-    });
-  }
-  while (cells.length < 42) cells.push({ day: null, entries: [], isToday: false, isPast: false });
-  return cells;
-};
-
-const isExternal = (href: string) => href.startsWith("http");
-
-const MONTHS_AHEAD = 12;
-const months = Array.from({ length: MONTHS_AHEAD + 1 }, (_, i) => {
-  const d = new Date(monthAnchor.year, monthAnchor.month + i, 1);
-  return {
-    label: d.toLocaleDateString("en-US", { month: "long", year: "numeric" }),
-    cells: buildMonth(d.getFullYear(), d.getMonth()),
-  };
-});
-const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const whatsappUrl = "https://chat.whatsapp.com/Cv5gtVnNhLT2lARM05sWgM";
 
 const equipment = [
   { qty: "×4", name: "SO-101 arm", body: "Hugging Face LeRobot 6-axis arms. Leader / follower teleoperation, imitation learning workflows.", image: "/vessel/equipment/so101.png", href: "https://huggingface.co/docs/lerobot/so101" },
@@ -138,7 +58,7 @@ const strip = [
 
   <header class="v2-hero">
     <div class="v2-logo-group">
-      <img src="/vessel/vessel-logo.png" alt="The Vessel" class="v2-logo" />
+      <img src="/vessel/vessel-logo-stacked.png" alt="The Vessel" class="v2-logo" />
       <a
         class="v2-supported"
         href="https://www.portofantwerpbruges.com/en"
@@ -185,50 +105,23 @@ const strip = [
     </button>
   </header>
 
-  <section class="v2-cal" aria-label="Vessel calendar" data-cal data-cal-count={months.length}>
-    <div class="v2-cal-head">
-      <div class="v2-cal-nav">
-        <button type="button" class="v2-cal-arrow" data-cal-prev aria-label="Previous month" disabled>
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <h2 class="v2-cal-month" data-cal-label aria-live="polite">{months[0].label}</h2>
-        <button type="button" class="v2-cal-arrow" data-cal-next aria-label="Next month">
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <p class="v2-cal-legend">
-        <span><i class="v2-cal-mark is-openlab"></i>Open Lab</span>
-        <span><i class="v2-cal-mark is-event"></i>Event</span>
-      </p>
-    </div>
+  <section class="v2-wa" aria-label="Join the WhatsApp community">
+    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="v2-btn v2-btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.69 5.523l-.999 3.648 3.798-.97zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      Join our WhatsApp
+    </a>
+  </section>
 
-    <div class="v2-cal-week" aria-hidden="true">
-      {weekdayLabels.map((w) => <span>{w}</span>)}
+  <section class="v2-up" aria-label="What we're up to">
+    <h2 class="v2-h2">What we&rsquo;re up to.</h2>
+    <div class="v2-up-grid">
+      <video class="v2-up-item v2-up-a" src="/vessel/up-to/clip-2.mp4" autoplay loop muted playsinline preload="metadata" aria-label="Polar bear mascot roaming the lab"></video>
+      <video class="v2-up-item v2-up-b" src="/vessel/up-to/clip-1.mp4" autoplay loop muted playsinline preload="metadata" aria-label="North Star Kids workbook"></video>
+      <img class="v2-up-item v2-up-c" src="/vessel/up-to/pic-1.jpg" alt="Robot arm learning table air hockey" loading="lazy" />
+      <img class="v2-up-item v2-up-d" src="/vessel/up-to/pic-3.jpg" alt="A family of 3D-printed polar bears" loading="lazy" />
+      <video class="v2-up-item v2-up-e" src="/vessel/up-to/clip-3.mp4" autoplay loop muted playsinline preload="metadata" aria-label="Quadruped robot on the workbench"></video>
+      <img class="v2-up-item v2-up-f" src="/vessel/up-to/pic-2.jpg" alt="Working session around the robot cart" loading="lazy" />
     </div>
-
-    {months.map((m, mi) => (
-      <div class="v2-cal-grid" data-cal-month={mi} data-cal-monthlabel={m.label} hidden={mi !== 0}>
-        {m.cells.map((c) => (
-          <div class:list={["v2-cal-cell", c.day === null && "is-empty", c.isToday && "is-today", c.isPast && "is-past"]}>
-            {c.day !== null && (
-              <>
-                <span class="v2-cal-num">{c.day}</span>
-                {c.entries.map((entry) => (
-                  <a
-                    href={entry.href}
-                    class:list={["v2-cal-entry", `is-${entry.type}`]}
-                    target={isExternal(entry.href) ? "_blank" : undefined}
-                    rel={isExternal(entry.href) ? "noopener noreferrer" : undefined}
-                  >
-                    {entry.title}
-                  </a>
-                ))}
-              </>
-            )}
-          </div>
-        ))}
-      </div>
-    ))}
   </section>
 
   <div class="v2-content">
@@ -322,6 +215,14 @@ const strip = [
 
 <script is:inline>
   (function () {
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll(".v2-up-grid video").forEach(function (v) {
+      v.removeAttribute("autoplay");
+      v.pause();
+    });
+  })();
+
+  (function () {
     const img = document.querySelector("[data-v2-bg-img]");
     const sun = document.querySelector("[data-v2-sun]");
     if (!img || !sun) return;
@@ -367,182 +268,58 @@ const strip = [
     });
   })();
 
-  (function () {
-    const cal = document.querySelector("[data-cal]");
-    if (!cal) return;
-    const months = Array.prototype.slice.call(cal.querySelectorAll("[data-cal-month]"));
-    const label = cal.querySelector("[data-cal-label]");
-    const prev = cal.querySelector("[data-cal-prev]");
-    const next = cal.querySelector("[data-cal-next]");
-    if (!months.length || !label || !prev || !next) return;
-
-    let index = 0;
-    const show = (i) => {
-      index = Math.max(0, Math.min(months.length - 1, i));
-      months.forEach((m, mi) => { m.hidden = mi !== index; });
-      label.textContent = months[index].getAttribute("data-cal-monthlabel");
-      prev.disabled = index === 0;
-      next.disabled = index === months.length - 1;
-    };
-
-    prev.addEventListener("click", () => show(index - 1));
-    next.addEventListener("click", () => show(index + 1));
-    show(0);
-  })();
-
 </script>
 
 <style is:global>
-  /* ── Calendar (simple, static) ── */
-  .v2-cal {
+  /* ── WhatsApp CTA ── */
+  .v2-wa {
     position: relative;
     z-index: 2;
-    max-width: 720px;
-    margin: clamp(1rem, 3vh, 2.5rem) auto;
-    padding: clamp(1.4rem, 3vw, 2rem);
-    background: rgba(12, 12, 14, 0.72);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-  }
-  .v2-cal-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  .v2-cal-nav {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .v2-cal-month {
-    margin: 0;
-    min-width: 9ch;
-    font-family: "Instrument Serif", "Cormorant", serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: rgba(255,255,255,0.92);
-  }
-  .v2-cal-arrow {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.14);
-    color: rgba(255,255,255,0.8);
-    cursor: pointer;
-    transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-  }
-  .v2-cal-arrow svg { width: 14px; height: 14px; }
-  .v2-cal-arrow:hover:not(:disabled) {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.36);
-    color: #fff;
-  }
-  .v2-cal-arrow:disabled {
-    opacity: 0.3;
-    cursor: default;
-  }
-  .v2-cal-legend {
-    margin: 0;
-    display: flex;
-    gap: 1rem;
-    font-family: "Geist", sans-serif;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.55);
-  }
-  .v2-cal-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
-  .v2-cal-mark { width: 7px; height: 7px; border-radius: 50%; }
-  .v2-cal-mark.is-openlab { background: #6ad7c5; }
-  .v2-cal-mark.is-event { background: #f5b97e; }
-
-  .v2-cal-week {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    font-family: "Geist", sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-  }
-  .v2-cal-week span { padding: 0 0 0.5rem 0.1rem; }
-
-  .v2-cal-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border-top: 1px solid rgba(255,255,255,0.12);
-    border-left: 1px solid rgba(255,255,255,0.12);
-  }
-  .v2-cal-grid[hidden] { display: none; }
-  .v2-cal-cell {
-    min-height: 64px;
-    padding: 0.4rem 0.45rem;
-    border-right: 1px solid rgba(255,255,255,0.12);
-    border-bottom: 1px solid rgba(255,255,255,0.12);
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-  }
-  .v2-cal-cell.is-past { opacity: 0.4; }
-  .v2-cal-num {
-    font-family: "Geist", sans-serif;
-    font-variant-numeric: tabular-nums;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.7);
-  }
-  .v2-cal-cell.is-today .v2-cal-num {
-    align-self: flex-start;
-    color: #0b0b0d;
-    background: rgba(255,255,255,0.92);
-    border-radius: 999px;
-    min-width: 1.35rem;
-    height: 1.35rem;
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 0.3rem;
+    gap: 1rem;
+    margin: clamp(1rem, 3vh, 2.5rem) auto;
+    padding: 0 1.2rem;
+    text-align: center;
   }
-  .v2-cal-entry {
-    font-family: "Geist", sans-serif;
-    font-size: 0.62rem;
-    line-height: 1.25;
-    color: rgba(255,255,255,0.75);
-    text-decoration: none;
-    padding-left: 0.55rem;
-    border-left: 2px solid transparent;
-    transition: color 150ms ease;
-  }
-  .v2-cal-entry:hover { color: #fff; }
-  .v2-cal-entry.is-openlab { border-left-color: #6ad7c5; }
-  .v2-cal-entry.is-event { border-left-color: #f5b97e; }
 
+  /* ── What we're up to (mosaic) ── */
+  .v2-up {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: clamp(2.5rem, 7vh, 5rem) auto 0;
+    padding: 0 clamp(1.2rem, 4vw, 2.4rem);
+  }
+  .v2-up-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(120px, 16vw, 200px);
+    grid-auto-flow: dense;
+    gap: 0.7rem;
+  }
+  .v2-up-item {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(8, 8, 10, 0.55);
+    box-shadow: 0 18px 40px -18px rgba(0,0,0,0.6);
+  }
+  .v2-up-a { grid-column: span 2; grid-row: span 2; }
+  .v2-up-b { grid-row: span 2; }
+  .v2-up-c { grid-column: span 2; }
+  .v2-up-d { grid-row: span 2; }
   @media (max-width: 640px) {
-    .v2-cal-cell { min-height: 48px; padding: 0.3rem 0.3rem; }
-    .v2-cal-num { font-size: 0.7rem; }
-    .v2-cal-entry {
-      font-size: 0;
-      padding-left: 0;
-      border-left: 0;
+    .v2-up-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: clamp(110px, 30vw, 160px);
+      gap: 0.5rem;
     }
-    .v2-cal-entry::before {
-      content: "";
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-    .v2-cal-entry.is-openlab::before { background: #6ad7c5; }
-    .v2-cal-entry.is-event::before { background: #f5b97e; }
   }
-
 
   /* ── Background ── */
   .v2-bg {
@@ -638,7 +415,7 @@ const strip = [
   }
   .v2-logo {
     display: block;
-    width: min(640px, 82vw);
+    width: min(400px, 72vw);
     height: auto;
     filter: drop-shadow(0 4px 18px rgba(0,0,0,0.85))
             drop-shadow(0 10px 60px rgba(0,0,0,0.65));
@@ -647,7 +424,7 @@ const strip = [
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    margin-top: clamp(-1.2rem, -2.4vh, -0.4rem);
+    margin-top: 0.9rem;
     text-decoration: none;
     opacity: 0.85;
     transition: opacity 200ms ease;
