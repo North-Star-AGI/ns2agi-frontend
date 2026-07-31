@@ -211,6 +211,8 @@ const strip = [
       </div>
     </section>
   </div>
+
+  <img class="v2-polaris" src="/vessel/polaris-chilling.gif" alt="Polaris the polar bear chilling on the beach" loading="lazy" />
 </Layout>
 
 <script is:inline>
@@ -319,6 +321,19 @@ const strip = [
       grid-auto-rows: clamp(110px, 30vw, 160px);
       gap: 0.5rem;
     }
+  }
+
+  /* ── Polaris chilling in the corner ── */
+  .v2-polaris {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: clamp(72px, 9vw, 112px);
+    height: auto;
+    /* negative bottom margin drops him past the transparent footer onto the sand */
+    margin: clamp(2.5rem, 8vh, 5rem) clamp(1.5rem, 7vw, 6rem) -110px auto;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
   }
 
   /* ── Background ── */
