@@ -1,0 +1,2912 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ArrowRight } from "lucide-react";
+
+type Tag = "hackathon" | "meetup" | "robotics" | "kids" | "milestone";
+
+interface Moment {
+    date: string;
+    dateLabel: string;
+    title: string;
+    description: string;
+    tag: Tag;
+    image?: string;
+    poster?: boolean;
+    contain?: boolean;
+    imgPos?: string;
+    stat?: string;
+    first?: string;
+    link?: string;
+    contributed?: boolean;
+}
+
+interface Chapter {
+    numeral: string;
+    id: string;
+    title: string;
+    period: string;
+    intro: string;
+    moments: Moment[];
+}
+
+const chapters: Chapter[] = [
+    {
+        numeral: "I",
+        id: "chapter-1",
+        title: "The Spark",
+        period: "Feb — Jun 2025",
+        intro:
+            "It started with a hackathon. Ninety spots at The Beacon in Antwerp, teams of three, and the promise of pizza. The people who showed up on a Saturday to build something turned out to be the same people willing to build everything that came after.",
+        moments: [
+            {
+                date: "2025-02-16",
+                dateLabel: "16 Feb 2025",
+                title: "The first announcement",
+                description: "One post, 90 spots — and no idea what it would become.",
+                tag: "milestone",
+                image: "/2025/ai-hackathon-i-2.jpg",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7296770280956256256",
+            },
+            {
+                date: "2025-03-08",
+                dateLabel: "8 Mar 2025",
+                title: "AI Hackathon I",
+                description: "Fourteen teams build agentic AI from scratch at The Beacon.",
+                tag: "hackathon",
+                image: "/2025/ai-hackathon-i-3.jpg",
+                stat: "14 teams",
+                first: "First hackathon",
+                link: "/events/ai-hackathon-i",
+            },
+            {
+                date: "2025-05-01",
+                dateLabel: "1 May 2025",
+                title: "A robotic fish in Ghent",
+                description: "With Nerdlab, a sentient robotic fish swims into the BROEI opening.",
+                tag: "robotics",
+                image: "/2025/misc-SCR-20260308-stfw.jpg",
+            },
+            {
+                date: "2025-05-10",
+                dateLabel: "10 May 2025",
+                title: "AI Hackathon II",
+                description: "“Augmenting Antwerp with AI” — the city becomes the challenge.",
+                tag: "hackathon",
+                image: "/2025/ai-hackathon-ii-1.jpg",
+                link: "/events/ai-hackathon-ii",
+            },
+            {
+                date: "2025-06-05",
+                dateLabel: "5 Jun 2025",
+                title: "SIGNAL I",
+                description: "Demos instead of slides — including live imec animatronics.",
+                tag: "meetup",
+                image: "/2025/signal-i-1.jpg",
+                stat: "50 people",
+                first: "First meetup",
+                link: "/events/signal-i",
+            },
+            {
+                date: "2025-06-14",
+                dateLabel: "14–15 Jun 2025",
+                title: "Robotics Hackathon I",
+                description: "Belgium joins the worldwide LeRobot challenge — and wins a global prize.",
+                tag: "robotics",
+                image: "/2025/robotics-i-1.jpg",
+                stat: "Global prize won",
+                first: "First global prize",
+                link: "/events/robotics-hackathon-i",
+            },
+        ],
+    },
+    {
+        numeral: "II",
+        id: "chapter-2",
+        title: "Making It Real",
+        period: "Jul — Dec 2025",
+        intro:
+            "Six months in, the experiment became an institution. North Star registered as a Belgian non-profit, assembled a core team of sixteen, and ran the world’s largest chapter of a kids AI hackathon — all while closing its first year in the black, without a single subsidy.",
+        moments: [
+            {
+                date: "2025-07-03",
+                dateLabel: "3 Jul 2025",
+                title: "North Star AGI VZW is born",
+                description: "The hackathon crew becomes a Belgian non-profit with a mission.",
+                tag: "milestone",
+                image: "/2025/get-sip-done-1.jpg",
+                first: "Registered non-profit",
+            },
+            {
+                date: "2025-07-28",
+                dateLabel: "28 Jul 2025",
+                title: "Chapter II begins",
+                description: "200 people on Discord and four goals for the road ahead.",
+                tag: "milestone",
+                image: "/2025/misc-photo_2026-03-08_21.51.34.jpg",
+                stat: "200 on Discord",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7355537545343967232",
+            },
+            {
+                date: "2025-08-01",
+                dateLabel: "1 Aug 2025",
+                title: "belgiumtech.events ships",
+                description: "From idea to deployed in one month — the seed of Etoile.",
+                tag: "milestone",
+                image: "/2025/projects-SCR-20260226-ogcq.jpg",
+                stat: "60 events indexed",
+            },
+            {
+                date: "2025-08-18",
+                dateLabel: "18 Aug 2025",
+                title: "A core team of sixteen",
+                description: "Sixteen volunteers, one vision — the backbone takes shape.",
+                tag: "milestone",
+                image: "/2025/misc-photo_2026-03-08_21.53.26.jpg",
+                stat: "16 people",
+            },
+            {
+                date: "2025-08-21",
+                dateLabel: "21 Aug 2025",
+                title: "SIGNAL II",
+                description: "A full house at The Beacon, from Ghent University to Ingram.",
+                tag: "meetup",
+                image: "/2025/signal-ii-2.jpg",
+                stat: "61 attendees",
+                link: "/events/signal-ii",
+            },
+            {
+                date: "2025-08-30",
+                dateLabel: "30 Aug 2025",
+                title: "AI Hackathon III — Change The Outcome",
+                description: "One weekend of building to change the outcome.",
+                tag: "hackathon",
+                image: "/2025/ai-hackathon-iii-10.jpg",
+                stat: "400+ build hours",
+                link: "/events/ai-hackathon-iii",
+            },
+            {
+                date: "2025-09-02",
+                dateLabel: "2 Sep 2025",
+                title: "Chosen for the UN Robotics for Good challenge",
+                description: "Selected as Belgian organiser — finals at the AI for Good Summit in Geneva.",
+                tag: "kids",
+                image: "/2025/kids-hackathon-3.jpg",
+                poster: true,
+                first: "UN mandate for Belgium",
+            },
+            {
+                date: "2025-09-25",
+                dateLabel: "25–26 Sep 2025",
+                title: "BruCON",
+                description: "A booth, a CTF win, and a humanoid on the main stage.",
+                tag: "robotics",
+                contributed: true,
+                image: "/2025/misc-Multi-design_Misc_2.jpg",
+                poster: true,
+                link: "/events/brucon",
+            },
+            {
+                date: "2025-10-11",
+                dateLabel: "11 Oct 2025",
+                title: "Kids AI Vibecoding Hackathon",
+                description: "100 kids and 80 volunteers, live across six cities at once.",
+                tag: "kids",
+                image: "/2025/kids-hackathon-1.jpg",
+                poster: true,
+                stat: "100 kids · 6 cities",
+                first: "World’s largest chapter",
+                link: "/events/kids-ai-vibecoding-hackathon",
+            },
+            {
+                date: "2025-10-18",
+                dateLabel: "18 Oct 2025",
+                title: "Future In Bloom Pt. I",
+                description: "No talks — just builders, a robot dog and VR teleop in Brussels.",
+                tag: "robotics",
+                image: "/2025/future-in-bloom-1.jpg",
+                link: "/events/future-in-bloom-pt1",
+            },
+            {
+                date: "2025-10-31",
+                dateLabel: "31 Oct 2025",
+                title: "Expedition to Paris",
+                description: "STATION F, the Hugging Face office, an EWOR founders’ night.",
+                tag: "milestone",
+                image: "/2025/team-polaris.jpg",
+                poster: true,
+            },
+            {
+                date: "2025-11-05",
+                dateLabel: "5 Nov 2025",
+                title: "Tectonic",
+                description: "A humanoid, a robot dog and a KUKA arm before 2,000 visitors.",
+                tag: "robotics",
+                contributed: true,
+                image: "/2025/tectonic-SCR-20260308-stdv.jpg",
+                stat: "2,000 visitors",
+                link: "/events/tectonic",
+            },
+            {
+                date: "2025-11-20",
+                dateLabel: "20 Nov 2025",
+                title: "27th Belgium NLP Meetup",
+                description: "Back in Antwerp for the first time in six years.",
+                tag: "meetup",
+                image: "/belgium-nlp-meetup/1.avif",
+                link: "/events/belgium-nlp-meetup-27",
+            },
+            {
+                date: "2025-11-22",
+                dateLabel: "22 Nov 2025",
+                title: "Agentic Payments Hackathon with Stripe",
+                description: "Thirty builders teach AI agents to handle money.",
+                tag: "hackathon",
+                image: "/2025/stripe-hackathon-1.jpg",
+                poster: true,
+                stat: "30 builders",
+                link: "/events/stripe-hackathon",
+            },
+            {
+                date: "2025-12-11",
+                dateLabel: "11 Dec 2025",
+                title: "ElevenLabs Worldwide Hackathon — Ghent",
+                description: "Ghent joins 30 cities worldwide, hacking on voice at once.",
+                tag: "hackathon",
+                image: "/2025/elevenlabs-1.jpg",
+                stat: "40 builders · 30 cities",
+                link: "/events/elevenlabs-hackathon-ghent",
+            },
+            {
+                date: "2025-12-31",
+                dateLabel: "31 Dec 2025",
+                title: "Year one closes — in the black",
+                description: "Twelve activities, eight paying clients, zero subsidies.",
+                tag: "milestone",
+                image: "/2025/signal.jpg",
+                stat: "12 events · €0 subsidies",
+            },
+        ],
+    },
+    {
+        numeral: "III",
+        id: "chapter-3",
+        title: "Infrastructure",
+        period: "Jan — Jun 2026",
+        intro:
+            "2025 proved the demand. 2026 anchors it. The shift: from one-off events to continuous programmes, physical spaces and institutional partnerships — a lab in the port, a first grant, a first event abroad, and fourteen activities in five months.",
+        moments: [
+            {
+                date: "2026-01-14",
+                dateLabel: "14 Jan 2026",
+                title: "Etoile launches",
+                description: "Belgium’s tech events, indexed — 280+ at launch.",
+                tag: "milestone",
+                image: "/2025/etoile-og.jpg",
+                stat: "280+ events listed",
+                link: "https://etoile.events",
+            },
+            {
+                date: "2026-01-29",
+                dateLabel: "29 Jan 2026",
+                title: "SIGNAL III",
+                description: "Collibra co-founder Stijn Christiaens on agents and their data.",
+                tag: "meetup",
+                image: "/2025/signal-iii-1.jpg",
+                poster: true,
+                link: "/events/signal-iii",
+            },
+            {
+                date: "2026-02-10",
+                dateLabel: "10 Feb 2026",
+                title: "University Robotics Workshop",
+                description: "SO-101 arms and imitation learning, taught to the next cohort.",
+                tag: "robotics",
+                image: "/2025/ap-workshop-photo_2026-03-08_19.50.40.jpg",
+                link: "/events/ap-robotics-workshop",
+            },
+            {
+                date: "2026-02-26",
+                dateLabel: "26 Feb 2026",
+                title: "AI Community Journal Club #001",
+                description: "A paper-reading evening with AI Belgium, in the port.",
+                tag: "meetup",
+                image: "/2025/journal-club-1-photo_2026-03-08_19.28.17.jpg",
+                link: "/events/ai-community-journal-club-001",
+            },
+            {
+                date: "2026-03-03",
+                dateLabel: "3 Mar 2026",
+                title: "Vasiliki joins as Co-Founder & COO",
+                description: "The lead behind the kids hackathon steps up to co-founder.",
+                tag: "milestone",
+                image: "/2025/team-3.jpg",
+            },
+            {
+                date: "2026-03-09",
+                dateLabel: "9 Mar 2026",
+                title: "The Charter",
+                description: "Four commitments, written down: Events, Education, Engineering, Ecosystem.",
+                tag: "milestone",
+                image: "/2025/future-is-you.jpg",
+                link: "/commitments",
+            },
+            {
+                date: "2026-03-19",
+                dateLabel: "19 Mar 2026",
+                title: "The Vessel opens",
+                description: "Belgium’s first open AI & robotics lab, in the Antwerp port.",
+                tag: "milestone",
+                image: "/2025/vessel-mosaic-2.jpg",
+                stat: "Belgium’s first open lab",
+                first: "First physical space",
+                link: "/vessel",
+            },
+            {
+                date: "2026-04-10",
+                dateLabel: "10 Apr 2026",
+                title: "EWOR Community Partner",
+                description: "Fast-tracking founders into Europe’s most selective fellowship.",
+                tag: "milestone",
+                image: "/2025/nsstar-clean.svg",
+                contain: true,
+            },
+            {
+                date: "2026-05-12",
+                dateLabel: "12 May 2026",
+                title: "Benelux Robotics Meetup — Eindhoven",
+                description: "Sold out at TU Eindhoven — crossing the border with AISO.",
+                tag: "robotics",
+                image: "/2025/benelux-robotics-1.jpg",
+                stat: "Sold out",
+                first: "First event abroad",
+                link: "/events/benelux-robotics-meetup",
+            },
+            {
+                date: "2026-05-30",
+                dateLabel: "30 May 2026",
+                title: "Hackers & Ravers",
+                description: "A 12-hour hackathon fused with a rave under the Wintercircus dome.",
+                tag: "hackathon",
+                image: "/2025/hackers-and-ravers-cover.jpg",
+                contributed: true,
+                stat: "200 builders",
+                link: "/events/hackers-and-ravers",
+            },
+            {
+                date: "2026-06-15",
+                dateLabel: "Jun 2026",
+                title: "SCHIP — the first grant",
+                description: "The first grant won — a VLAIO-funded kids camp at The Vessel.",
+                tag: "kids",
+                image: "/2025/schip-cover.jpg",
+                poster: true,
+                stat: "VLAIO STEM grant",
+                first: "First grant won",
+            },
+            {
+                date: "2026-06-22",
+                dateLabel: "22 Jun 2026",
+                title: "Belgium’s first OpenAI Codex meetup",
+                description: "Live demos and an OpenAI engineer AMA — Antwerp edition five days later.",
+                tag: "meetup",
+                image: "/2025/codex-meetup-cover.jpg",
+                poster: true,
+                imgPos: "center bottom",
+                first: "First in Belgium",
+                link: "/events/openai-codex-meetup",
+            },
+        ],
+    },
+];
+
+interface SeamQuote {
+    lines: string[];
+    attribution: string;
+    align: "left" | "right";
+}
+
+const quoteAfterChapter: Record<string, SeamQuote> = {
+    "chapter-1": {
+        lines: ["The game is yours", "to win or lose."],
+        attribution: "LinkedIn · 18 Jul 2025",
+        align: "right",
+    },
+    "chapter-2": {
+        lines: ["The endgame was", "never only Belgium."],
+        attribution: "LinkedIn · 3 Nov 2025",
+        align: "left",
+    },
+};
+
+const growthQuote: SeamQuote = {
+    lines: ["An event is a dot.", "A community is a line.", "Only lines compound."],
+    attribution: "The Charter · 9 Mar 2026",
+    align: "left",
+};
+
+const moreByChapter: Record<string, { date: string; title: string; note: string }[]> = {
+    "chapter-2": [
+        { date: "13 Aug 2025", title: "BruCON becomes the first Diamond Core sponsor", note: "Sponsorship" },
+        { date: "18 Sep 2025", title: "10+ hired, ~60 people per event, 2,000+ hours of innovation", note: "Six months in" },
+        { date: "20 Sep 2025", title: "Odoo Experience booth — SO-101 arms and a humanoid", note: "Conference" },
+        { date: "1 Oct 2025", title: "Autodiscovery becomes a Galaxy Sponsor", note: "Sponsorship" },
+    ],
+    "chapter-3": [
+        { date: "18 Feb 2026", title: "“Polaris” revealed — the Discord bot that runs hackathons", note: "Engineering" },
+        { date: "23 Mar 2026", title: "NTGent residency — two weeks of AI-theatre R&D at Wintercircus", note: "Culture" },
+        { date: "1 Apr 2026", title: "Journal Club #2 at Collibra — 70 years of ML in one evening", note: "Community" },
+        { date: "24 Jun 2026", title: "Mahmoud Mamo joins as Community Lead — “I’m 17, from Charleroi”", note: "Team" },
+    ],
+};
+
+const ahead = [
+    { date: "3–8 Jul 2026", title: "SCHIP kids summer camp", note: "The Vessel · VLAIO grant" },
+    { date: "18 Jul 2026", title: "Hack-Nation Global AI Hackathon", note: "Brussels hub · with WAT.BXL, alongside MIT & Stanford hubs" },
+    { date: "16 Sep 2026", title: "Public AI Hackathon & Port of the Future Summit", note: "Antwerp · with the Province and Port of Antwerp-Bruges" },
+    { date: "10 Oct 2026", title: "Aurora", note: "Flagship AI & robotics conference · VUB Brussels" },
+];
+
+const firsts = [
+    { label: "First hackathon", date: "Mar 2025", detail: "14 teams at The Beacon", image: "/2025/ai-hackathon-i-3.jpg" },
+    { label: "First global prize", date: "Jun 2025", detail: "Worldwide LeRobot challenge", image: "/2025/robotics-i-1.jpg" },
+    { label: "World’s largest kids chapter", date: "Oct 2025", detail: "100 kids across 6 cities", image: "/2025/kids-hackathon-2.jpg" },
+    { label: "First open lab in Belgium", date: "Mar 2026", detail: "The Vessel, Antwerp port", image: "/2025/vessel-mosaic-1.jpg" },
+    { label: "First event abroad", date: "May 2026", detail: "Sold out at TU Eindhoven", image: "/2025/benelux-robotics-1.jpg" },
+    { label: "First grant won", date: "Jun 2026", detail: "SCHIP · VLAIO STEM call", image: "/2025/schip-cover.jpg" },
+];
+
+const stats = [
+    { value: 27, suffix: "", label: "events organised" },
+    { value: 2000, suffix: "+", label: "builders engaged" },
+    { value: 7, suffix: "", label: "cities" },
+    { value: 20, suffix: "+", label: "hires through the ecosystem" },
+];
+
+const growth = [
+    { date: "Sep 2025", value: 700, label: "LinkedIn followers" },
+    { date: "Oct 2025", value: 1000, label: "LinkedIn followers" },
+    { date: "Jun 2026", value: 2000, label: "LinkedIn followers" },
+];
+
+const pulse = [
+    { m: "Feb 2025", n: 1 }, { m: "Mar 2025", n: 0 }, { m: "Apr 2025", n: 0 },
+    { m: "May 2025", n: 1 }, { m: "Jun 2025", n: 0 }, { m: "Jul 2025", n: 4 },
+    { m: "Aug 2025", n: 18 }, { m: "Sep 2025", n: 29 }, { m: "Oct 2025", n: 43 },
+    { m: "Nov 2025", n: 16 }, { m: "Dec 2025", n: 8 }, { m: "Jan 2026", n: 9 },
+    { m: "Feb 2026", n: 7 }, { m: "Mar 2026", n: 19 }, { m: "Apr 2026", n: 10 },
+    { m: "May 2026", n: 14 }, { m: "Jun 2026", n: 17 },
+];
+const pulseMax = Math.max(...pulse.map((p) => p.n));
+const pulseNote = (m: string) => (m === "Oct 2025" ? " — the kids hackathon month" : "");
+
+const filmstrip = [
+    { src: "/2025/signal-i-5.jpg", label: "SIGNAL I · Jun 2025 · Antwerp" },
+    { src: "/2025/ai-hackathon-ii-3.jpg", label: "AI Hackathon II · May 2025 · The Beacon" },
+    { src: "/2025/robotics-i-3.jpg", label: "Robotics Hackathon I · Jun 2025" },
+    { src: "/2025/kids-hackathon-2.jpg", label: "Kids AI Vibecoding Hackathon · Oct 2025" },
+    { src: "/2025/future-in-bloom-2.jpg", label: "Future In Bloom · Oct 2025 · Brussels" },
+    { src: "/2025/ai-hackathon-iii-2.jpg", label: "AI Hackathon III · Aug 2025" },
+    { src: "/2025/signal-ii-2.jpg", label: "SIGNAL II · Aug 2025 · The Beacon" },
+    { src: "/2025/elevenlabs-2.jpg", label: "ElevenLabs Hackathon · Dec 2025 · Ghent" },
+    { src: "/2025/vessel-mosaic-1.jpg", label: "The Vessel · Mar 2026 · Antwerp port" },
+    { src: "/2025/benelux-robotics-3.jpg", label: "Benelux Robotics Meetup · May 2026 · Eindhoven" },
+    { src: "/2025/vessel-mosaic-day-0.jpg", label: "The Vessel, day zero · Mar 2026" },
+    { src: "/2025/signal-i-12.jpg", label: "SIGNAL I · Jun 2025 · Antwerp" },
+];
+
+const constellation = [
+    { x: 4, y: 62, label: "AI Hackathon I", date: "Mar 2025" },
+    { x: 8, y: 30, label: "Robotic fish at BROEI", date: "May 2025" },
+    { x: 12, y: 74, label: "AI Hackathon II", date: "May 2025" },
+    { x: 16, y: 22, label: "SIGNAL I", date: "Jun 2025" },
+    { x: 20, y: 48, label: "Robotics Hackathon I", date: "Jun 2025" },
+    { x: 26, y: 68, label: "SIGNAL II", date: "Aug 2025" },
+    { x: 29, y: 14, label: "AI Hackathon III", date: "Aug 2025" },
+    { x: 33, y: 36, label: "Odoo Experience booth", date: "Sep 2025" },
+    { x: 36, y: 78, label: "BruCON", date: "Sep 2025" },
+    { x: 40, y: 20, label: "Kids AI Vibecoding Hackathon", date: "Oct 2025" },
+    { x: 44, y: 55, label: "Future In Bloom Pt. I", date: "Oct 2025" },
+    { x: 47, y: 10, label: "Tectonic", date: "Nov 2025" },
+    { x: 50, y: 70, label: "27th Belgium NLP Meetup", date: "Nov 2025" },
+    { x: 54, y: 30, label: "Stripe Agentic Payments Hackathon", date: "Nov 2025" },
+    { x: 57, y: 82, label: "Get Sip Done Antwerp", date: "Nov 2025" },
+    { x: 60, y: 18, label: "ElevenLabs Hackathon Ghent", date: "Dec 2025" },
+    { x: 64, y: 45, label: "SIGNAL III", date: "Jan 2026" },
+    { x: 67, y: 75, label: "AP Robotics Workshop", date: "Feb 2026" },
+    { x: 70, y: 12, label: "OpenClaw Deep Dive", date: "Feb 2026" },
+    { x: 73, y: 58, label: "Journal Club #001", date: "Feb 2026" },
+    { x: 76, y: 28, label: "OpenLab at The Vessel", date: "Mar 2026" },
+    { x: 79, y: 80, label: "Girls in ICT Day", date: "Apr 2026" },
+    { x: 82, y: 40, label: "Benelux Robotics Meetup", date: "May 2026" },
+    { x: 85, y: 66, label: "TechXperience OpenClaw", date: "May 2026" },
+    { x: 88, y: 16, label: "Hackers & Ravers", date: "May 2026" },
+    { x: 91, y: 52, label: "Codex Meetup Ghent", date: "Jun 2026" },
+    { x: 94, y: 74, label: "Codex Meetup Antwerp", date: "Jun 2026" },
+];
+
+const constellationLines: [number, number][] = [
+    [0, 1], [1, 3], [3, 4], [5, 6], [7, 9], [10, 12], [11, 13],
+    [13, 15], [16, 18], [18, 20], [20, 22], [24, 25], [25, 26],
+];
+
+const closingQuote = {
+    lines: ["Some of them will be visible immediately.", "Some will bloom much later."],
+    attribution: "LinkedIn · 4 Jun 2026",
+};
+
+const tagLabels: Record<Tag, string> = {
+    hackathon: "Hackathon",
+    meetup: "Meetup",
+    robotics: "Robotics",
+    kids: "Kids",
+    milestone: "Milestone",
+};
+
+const allMoments = chapters.flatMap((c) => c.moments);
+const totalMoments = allMoments.length;
+const tagCounts: Record<string, number> = { all: totalMoments };
+for (const m of allMoments) tagCounts[m.tag] = (tagCounts[m.tag] ?? 0) + 1;
+
+const filters: { key: string; label: string }[] = [
+    { key: "all", label: "Everything" },
+    { key: "hackathon", label: "Hackathons" },
+    { key: "meetup", label: "Meetups" },
+    { key: "robotics", label: "Robotics" },
+    { key: "kids", label: "Kids" },
+    { key: "milestone", label: "Milestones" },
+];
+
+const filterNouns: Record<string, string> = {
+    all: "moments",
+    hackathon: "hackathons",
+    meetup: "meetups",
+    robotics: "robotics moments",
+    kids: "kids moments",
+    milestone: "milestones",
+};
+
+const STAR_PATH = "M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z";
+
+/* Growth line: sqrt scale, viewBox 0 0 800 220 */
+const gx = [40, 400, 760];
+const gMax = Math.sqrt(2000);
+const gy = growth.map((g) => 190 - (Math.sqrt(g.value) / gMax) * 160);
+const growthPath = `M${gx[0]},${gy[0].toFixed(1)} C${gx[0] + 120},${(gy[0] - 14).toFixed(1)} ${gx[1] - 120},${(gy[1] + 10).toFixed(1)} ${gx[1]},${gy[1].toFixed(1)} S${gx[2] - 120},${(gy[2] + 12).toFixed(1)} ${gx[2]},${gy[2].toFixed(1)}`;
+---
+
+<Layout title="Year One · 2025 | North Star">
+    <main class="yr-page">
+        <a class="yr-skip" href="#yr-timeline">Skip to the timeline</a>
+
+        <!-- ── Hero ── -->
+        <header class="yr-hero">
+            <div class="yr-hero-bleed" aria-hidden="true">
+                <img src="/2025/ai-hackathon-ii-4.jpg" alt="" decoding="async" fetchpriority="high" />
+            </div>
+            <span class="yr-ghost" data-hero-ghost aria-hidden="true">2025</span>
+            <div class="yr-hero-inner">
+                <p class="yr-eyebrow"><span class="yr-mask" style="--i:0"><span>North Star · Year in review</span></span></p>
+                <h1 class="yr-title"><span class="yr-mask" style="--i:1"><span>Year One</span></span></h1>
+                <p class="yr-sub">
+                    <span class="yr-mask" style="--i:2"><span>
+                        An idea and a Discord server became Belgium’s AI &amp; robotics
+                        community — in {totalMoments} moments.
+                    </span></span>
+                </p>
+                <div class="yr-scroll-cue" aria-hidden="true"><span></span></div>
+            </div>
+        </header>
+
+        <!-- ── Proof bar ── -->
+        <section class="yr-proof" data-reveal aria-label="Key numbers">
+            {stats.map((s, i) => (
+                <>
+                    {i > 0 && <span class="yr-proof-sep" aria-hidden="true"></span>}
+                    <div class="yr-proof-item">
+                        <span class="yr-proof-value" data-count={s.value} data-suffix={s.suffix} data-idx={i}>0{s.suffix}</span>
+                        <span class="yr-proof-label">{s.label}</span>
+                    </div>
+                </>
+            ))}
+        </section>
+
+        <!-- ── Filters + timeline zone (bounds the sticky chips) ── -->
+        <div class="yr-zone">
+        <nav class="yr-filters" data-reveal aria-label="Filter the timeline">
+            <div class="yr-chip-row">
+                {filters.map((f) => (
+                    <button
+                        type="button"
+                        class="yr-chip"
+                        data-filter={f.key}
+                        aria-pressed={f.key === "all" ? "true" : "false"}
+                    >{f.label}<span class="yr-chip-count">{tagCounts[f.key] ?? 0}</span></button>
+                ))}
+            </div>
+            <p class="yr-filter-readout yr-visually-hidden" aria-live="polite">Showing all {totalMoments} moments across three chapters.</p>
+        </nav>
+
+        <div class="yr-body">
+            <aside class="yr-rail" aria-label="Chapters">
+                {chapters.map((c) => (
+                    <a href={`#${c.id}`} class="yr-rail-link" data-rail={c.id}>
+                        <span class="yr-rail-numeral">{c.numeral}</span>
+                        <span class="yr-rail-meta">
+                            <span class="yr-rail-title">{c.title}</span>
+                            <span class="yr-rail-period">{c.period}</span>
+                        </span>
+                    </a>
+                ))}
+            </aside>
+
+            <div class="yr-timeline" id="yr-timeline" tabindex="-1">
+                <div class="yr-line" aria-hidden="true">
+                    <div class="yr-line-trail"></div>
+                    <svg class="yr-line-star" viewBox="0 0 24 24" fill="none">
+                        <g class="yr-star-core">
+                            <path d={STAR_PATH} fill="currentColor" />
+                        </g>
+                    </svg>
+                </div>
+
+                {chapters.map((c) => (
+                    <>
+                    <section class="yr-chapter" id={c.id} data-chapter={c.id}>
+                        <span class="yr-chapter-ghost" data-parallax="0.15" aria-hidden="true">{c.numeral}</span>
+                        <header class="yr-chapter-head" data-reveal>
+                            <span class="yr-chapter-numeral">Chapter {c.numeral}</span>
+                            <h2 class="yr-chapter-title">{c.title}
+                                <button type="button" class="yr-anchor" data-anchor={c.id} aria-label={`Copy link to chapter ${c.numeral}`}>
+                                    <span class="yr-swap">
+                                        <span class="yr-swap-a"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>
+                                        <span class="yr-swap-b"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+                                    </span>
+                                </button>
+                            </h2>
+                            <span class="yr-chapter-period">{c.period}</span>
+                        </header>
+
+                        {c.moments.map((m) => (
+                            <article class={`yr-moment${m.image ? " has-image" : ""}`} data-tag={m.tag} data-reveal>
+                                <div class="yr-dot" aria-hidden="true"></div>
+                                <div class="yr-moment-body">
+                                    <div class="yr-moment-meta">
+                                        <time datetime={m.date}>{m.dateLabel}</time>
+                                        <span class="yr-tag">{tagLabels[m.tag]}</span>
+                                        {m.contributed && <span class="yr-tag yr-tag-dim">Contributed</span>}
+                                        {m.first && <span class="yr-first">✦ {m.first}</span>}
+                                    </div>
+                                    <h3 class="yr-moment-title">
+                                        {m.link ? (
+                                            <a href={m.link} target={m.link.startsWith("http") ? "_blank" : undefined} rel={m.link.startsWith("http") ? "noopener noreferrer" : undefined}>
+                                                {m.title}
+                                            </a>
+                                        ) : (
+                                            m.title
+                                        )}
+                                    </h3>
+                                    <p class="yr-moment-desc">{m.description}</p>
+                                    {m.stat && <span class="yr-stat">{m.stat}</span>}
+                                </div>
+                                {m.image && (
+                                    <a class={`yr-moment-img${m.poster ? " is-poster" : ""}${m.contain ? " is-contain" : ""}`} href={m.link ?? m.image} target={m.link?.startsWith("http") ? "_blank" : undefined} tabindex="-1" aria-hidden="true">
+                                        <img src={m.image} alt={m.title} loading="lazy" decoding="async" style={m.imgPos ? `object-position: ${m.imgPos}` : undefined} />
+                                    </a>
+                                )}
+                            </article>
+                        ))}
+
+                        {moreByChapter[c.id] && (
+                            <details class="yr-more">
+                                <summary>
+                                    <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 1v10M1 6h10"/></svg>
+                                    {moreByChapter[c.id].length} more from this chapter
+                                </summary>
+                                <div class="yr-more-body">
+                                    {moreByChapter[c.id].map((x) => (
+                                        <div class="yr-ahead-row">
+                                            <span class="yr-ahead-date">{x.date}</span>
+                                            <span class="yr-ahead-title yr-more-title">{x.title}</span>
+                                            <span class="yr-ahead-note">{x.note}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </details>
+                        )}
+                    </section>
+
+                    {quoteAfterChapter[c.id] && (
+                        <figure class={`yr-quote yr-quote-${quoteAfterChapter[c.id].align}`} data-reveal>
+                            <svg class="yr-quote-star" viewBox="0 0 24 24" aria-hidden="true"><path d={STAR_PATH} fill="currentColor" /></svg>
+                            <blockquote>
+                                {quoteAfterChapter[c.id].lines.map((l, li) => (
+                                    <span class="yr-q-line" style={`--l:${li}`}><span>{l}</span></span>
+                                ))}
+                            </blockquote>
+                            <figcaption>{quoteAfterChapter[c.id].attribution}</figcaption>
+                        </figure>
+                    )}
+                    </>
+                ))}
+            </div>
+        </div>
+        </div>
+
+        <!-- ── Firsts ── -->
+        <section class="yr-firsts" aria-label="Firsts">
+            <h2 class="yr-section-title" data-reveal>A year of firsts</h2>
+            <div class="yr-firsts-grid">
+                {firsts.map((f, i) => (
+                    <div class="yr-first-card" data-reveal style={`--i:${i}`}>
+                        <img class="yr-first-bg" src={f.image} alt="" loading="lazy" decoding="async" />
+                        <span class="yr-first-star" aria-hidden="true">✦</span>
+                        <span class="yr-first-label">{f.label}</span>
+                        <span class="yr-first-detail">{f.detail}</span>
+                        <span class="yr-first-date">{f.date}</span>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <!-- ── Film strip ── -->
+        <section class="yr-strip" aria-label="Photos from the year">
+            <div class="yr-strip-track">
+                {[...filmstrip, ...filmstrip].map((p, i) => (
+                    <button
+                        type="button"
+                        class="yr-strip-btn"
+                        data-idx={i % filmstrip.length}
+                        aria-label={`View photo: ${p.label}`}
+                        aria-hidden={i >= filmstrip.length ? "true" : undefined}
+                        tabindex={i >= filmstrip.length ? "-1" : undefined}
+                    >
+                        <img src={p.src} alt="" loading="lazy" decoding="async" />
+                    </button>
+                ))}
+            </div>
+        </section>
+
+        <dialog class="yr-lightbox" aria-label="Photo viewer">
+            <figure>
+                <img alt="" />
+                <figcaption>
+                    <span class="yr-lb-caption"></span>
+                    <span class="yr-lb-count"></span>
+                </figcaption>
+            </figure>
+            <div class="yr-lb-controls">
+                <button type="button" class="yr-cta yr-lb-prev" aria-label="Previous photo">←</button>
+                <button type="button" class="yr-cta yr-lb-close">Close</button>
+                <button type="button" class="yr-cta yr-lb-next" aria-label="Next photo">→</button>
+            </div>
+        </dialog>
+
+        <!-- ── Charter quote ── -->
+        <figure class="yr-quote yr-quote-left yr-quote-charter" data-reveal>
+            <svg class="yr-quote-star" viewBox="0 0 24 24" aria-hidden="true"><path d={STAR_PATH} fill="currentColor" /></svg>
+            <blockquote>
+                {growthQuote.lines.map((l, li) => (
+                    <span class="yr-q-line" style={`--l:${li}`}><span>{l}</span></span>
+                ))}
+            </blockquote>
+            <figcaption>{growthQuote.attribution}</figcaption>
+        </figure>
+
+        <!-- ── Growth ── -->
+        <section class="yr-growth" data-reveal aria-label="Community growth">
+            <h2 class="yr-section-title">The line that compounds</h2>
+            <p class="yr-growth-sub">
+                195 posts, 9,000 likes, an 800+ member community.
+            </p>
+            <div class="yr-gline-wrap" aria-hidden="true">
+                <svg class="yr-gline" viewBox="0 0 800 220" preserveAspectRatio="none">
+                    <path class="yr-gline-path" d={growthPath} pathLength="1" />
+                    {growth.map((g, i) => (
+                        <path
+                            class="yr-gline-marker"
+                            d={STAR_PATH}
+                            style={`--d:${(0.4 + i * 0.4).toFixed(1)}s`}
+                            transform={`translate(${gx[i]},${gy[i].toFixed(1)}) scale(0.7) translate(-12,-12)`}
+                            data-final={i === growth.length - 1 ? "true" : undefined}
+                        />
+                    ))}
+                </svg>
+            </div>
+            <div class="yr-growth-row">
+                {growth.map((g, i) => (
+                    <div class="yr-growth-item">
+                        <span class="yr-growth-value" data-count={g.value} data-suffix="" data-idx={i}>0</span>
+                        <span class="yr-growth-label">{g.label}</span>
+                        <span class="yr-growth-date">{g.date}</span>
+                    </div>
+                ))}
+            </div>
+            <div class="yr-pulse">
+                <p class="yr-pulse-readout" aria-live="polite">17 months of posting — hover or tab through the bars.</p>
+                <div class="yr-pulse-strip">
+                    {pulse.map((p, i) => (
+                        <button
+                            type="button"
+                            class="yr-pulse-bar"
+                            data-note={`${p.m} · ${p.n} post${p.n === 1 ? "" : "s"}${pulseNote(p.m)}`}
+                            aria-label={`${p.m}, ${p.n} posts`}
+                            style={`--h:${(p.n / pulseMax).toFixed(3)}; --i:${i}`}
+                            data-peak={p.m === "Oct 2025" ? "true" : undefined}
+                        ><span></span></button>
+                    ))}
+                </div>
+                <p class="yr-pulse-meta">8,994 likes · 765 comments · 599 shares · posts before Jul 2025 only partially recovered</p>
+            </div>
+        </section>
+
+        <!-- ── Ahead ── -->
+        <section class="yr-ahead" data-reveal aria-label="What comes next">
+            <h2 class="yr-section-title">Chapter III is being written</h2>
+            <div class="yr-ahead-list">
+                {ahead.map((a) => (
+                    <div class="yr-ahead-row">
+                        <span class="yr-ahead-date">{a.date}</span>
+                        <span class="yr-ahead-title">{a.title}</span>
+                        <span class="yr-ahead-note">{a.note}</span>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <!-- ── Constellation ── -->
+        <section class="yr-sky" data-reveal aria-label="Every event of year one, as a constellation">
+            <svg class="yr-sky-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                {constellationLines.map(([a, b], i) => (
+                    <line
+                        x1={constellation[a].x} y1={constellation[a].y + 10}
+                        x2={constellation[b].x} y2={constellation[b].y + 10}
+                        pathLength="1"
+                        style={`--d:${(0.8 + i * 0.07).toFixed(2)}s`}
+                    />
+                ))}
+                <line x1="94" y1="84" x2="96.5" y2="16" pathLength="1" style="--d:2s" class="yr-sky-reach" />
+            </svg>
+            {constellation.map((s, i) => (
+                <button
+                    type="button"
+                    class="yr-sky-star"
+                    style={`left:${s.x}%; top:${s.y + 10}%; --i:${i}`}
+                    aria-label={`${s.label} · ${s.date}`}
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d={STAR_PATH} fill="currentColor" /></svg>
+                    <span class="yr-sky-label">{s.label}<em>{s.date}</em></span>
+                </button>
+            ))}
+            <button type="button" class="yr-sky-star yr-sky-north" style="left:96.5%; top:16%; --i:27" aria-label="North Star — the community itself">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d={STAR_PATH} fill="currentColor" /></svg>
+                <span class="yr-sky-label">North Star<em>the line itself</em></span>
+            </button>
+            <div class="yr-sky-quote">
+                {closingQuote.lines.map((l, li) => (
+                    <span class="yr-q-line" style={`--l:${li}`}><span>{l}</span></span>
+                ))}
+                <span class="yr-sky-attr">{closingQuote.attribution}</span>
+            </div>
+        </section>
+
+        <!-- ── CTAs ── -->
+        <section class="yr-close" data-reveal>
+            <div class="yr-cta-row">
+                <a class="yr-cta" href="https://discord.gg/m5Hknymurb" target="_blank" rel="noopener noreferrer">
+                    Join the community <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+                <a class="yr-cta" href="/work-with-us">
+                    Partner with us <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+                <a class="yr-cta" href="/events">
+                    See all events <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+                <button type="button" class="yr-cta yr-share">
+                    <span class="yr-swap">
+                        <span class="yr-swap-a">Share year one</span>
+                        <span class="yr-swap-b">Link copied</span>
+                    </span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+                </button>
+            </div>
+            <div class="yr-share-live" aria-live="polite"></div>
+        </section>
+    </main>
+</Layout>
+
+<script is:inline define:vars={{ stripData: filmstrip, filterNouns, tagCounts }}>
+    (function () {
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* ── Reveal observer ── */
+        var reveal = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-revealed");
+                        reveal.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+        document.querySelectorAll("[data-reveal]").forEach(function (el) {
+            reveal.observe(el);
+        });
+
+        /* ── Animated counters (staggered, with settle pop) ── */
+        var fmt = function (n) { return n.toLocaleString("en-US"); };
+        var counters = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    counters.unobserve(entry.target);
+                    var el = entry.target;
+                    var target = parseInt(el.dataset.count, 10);
+                    var suffix = el.dataset.suffix || "";
+                    if (reduced) {
+                        el.textContent = fmt(target) + suffix;
+                        return;
+                    }
+                    var delay = (parseInt(el.dataset.idx || "0", 10)) * 120;
+                    setTimeout(function () {
+                        var start = null;
+                        var dur = 1400;
+                        var step = function (ts) {
+                            if (!start) start = ts;
+                            var p = Math.min((ts - start) / dur, 1);
+                            var eased = 1 - Math.pow(1 - p, 3);
+                            el.textContent = fmt(Math.round(target * eased)) + suffix;
+                            if (p < 1) requestAnimationFrame(step);
+                            else el.classList.add("is-settled");
+                        };
+                        requestAnimationFrame(step);
+                    }, delay);
+                });
+            },
+            { threshold: 0.5 }
+        );
+        document.querySelectorAll("[data-count]").forEach(function (el) {
+            counters.observe(el);
+        });
+
+        /* ── Scroll engine: one listener, a registry of subscribers ── */
+        var timeline = document.getElementById("yr-timeline");
+        var star = document.querySelector(".yr-line-star");
+        var trail = document.querySelector(".yr-line-trail");
+        var dots = [];
+        var dotOffsets = [];
+        var parallaxEls = [];
+        var heroGhost = document.querySelector("[data-hero-ghost]");
+        var heroEl = document.querySelector(".yr-hero");
+
+        function cacheDots() {
+            if (!timeline) return;
+            var tlTop = timeline.getBoundingClientRect().top + window.scrollY;
+            dots = Array.prototype.slice
+                .call(timeline.querySelectorAll(".yr-moment:not(.is-hidden) .yr-dot"));
+            dotOffsets = dots.map(function (d) {
+                return d.getBoundingClientRect().top + window.scrollY - tlTop;
+            });
+        }
+
+        var heroH = 1;
+        function cacheParallax() {
+            if (heroEl) heroH = heroEl.offsetHeight || 1;
+            parallaxEls = Array.prototype.slice
+                .call(document.querySelectorAll("[data-parallax]"))
+                .map(function (el) {
+                    el.style.transform = "";
+                    var r = el.getBoundingClientRect();
+                    return {
+                        el: el,
+                        factor: parseFloat(el.dataset.parallax),
+                        center: r.top + window.scrollY + r.height / 2,
+                    };
+                });
+        }
+
+        var ticking = false;
+        function frame() {
+            ticking = false;
+            var vh = window.innerHeight;
+            var sy = window.scrollY;
+
+            if (timeline && star && trail) {
+                var rect = timeline.getBoundingClientRect();
+                var progress = Math.min(Math.max((vh * 0.45 - rect.top) / rect.height, 0), 1);
+                star.style.transform =
+                    "translateY(" + progress * (rect.height - 28) + "px) translateX(-50%)";
+                trail.style.transform = "scaleY(" + progress + ")";
+                var passed = progress * rect.height;
+                for (var i = 0; i < dots.length; i++) {
+                    dots[i].classList.toggle("is-lit", dotOffsets[i] <= passed);
+                }
+            }
+
+            for (var j = 0; j < parallaxEls.length; j++) {
+                var p = parallaxEls[j];
+                var y = (sy + vh / 2 - p.center) * p.factor;
+                p.el.style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
+            }
+
+            if (heroGhost && heroEl) {
+                var fade = 1 - Math.min(Math.max(sy / (heroH * 0.9), 0), 1);
+                heroGhost.style.opacity = String((0.9 * fade).toFixed(2));
+            }
+        }
+
+        if (!reduced) {
+            window.addEventListener(
+                "scroll",
+                function () {
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(frame);
+                    }
+                },
+                { passive: true }
+            );
+            window.addEventListener("resize", function () {
+                cacheDots();
+                cacheParallax();
+                requestAnimationFrame(frame);
+            }, { passive: true });
+            cacheDots();
+            cacheParallax();
+            frame();
+        }
+
+        /* Ledger open/close changes timeline height — recache */
+        document.querySelectorAll(".yr-more").forEach(function (d) {
+            d.addEventListener("toggle", function () {
+                setTimeout(function () {
+                    cacheDots();
+                    cacheParallax();
+                    requestAnimationFrame(frame);
+                }, 450);
+            });
+        });
+        /* Reveal transforms settle shortly after load — recache once */
+        setTimeout(function () {
+            cacheDots();
+            cacheParallax();
+            if (!reduced) requestAnimationFrame(frame);
+        }, 1500);
+
+        /* ── Filters: FLIP reflow, readout, URL state ── */
+        var chips = document.querySelectorAll(".yr-chip");
+        var readout = document.querySelector(".yr-filter-readout");
+        var moments = Array.prototype.slice.call(document.querySelectorAll(".yr-moment"));
+
+        function updateMeta(key) {
+            var count = tagCounts[key] || 0;
+            if (readout) {
+                readout.textContent = key === "all"
+                    ? "Showing all " + count + " moments across three chapters."
+                    : "Showing " + count + " " + (filterNouns[key] || "moments") + " across three chapters.";
+            }
+            document.querySelectorAll(".yr-chapter").forEach(function (ch) {
+                var any = ch.querySelector(".yr-moment:not(.is-hidden)");
+                var head = ch.querySelector(".yr-chapter-head");
+                if (head) head.classList.toggle("is-thinned", !any);
+            });
+            if (key === "all") history.replaceState(null, "", location.pathname + location.hash);
+            else history.replaceState(null, "", "?filter=" + key + location.hash);
+        }
+
+        function setChip(chip) {
+            chips.forEach(function (c) {
+                c.setAttribute("aria-pressed", c === chip ? "true" : "false");
+            });
+        }
+
+        function applyFilterInstant(key) {
+            moments.forEach(function (m) {
+                m.classList.toggle("is-hidden", !(key === "all" || m.dataset.tag === key));
+            });
+            updateMeta(key);
+            cacheDots();
+            cacheParallax();
+        }
+
+        var filtering = false;
+        function applyFilterFlip(key) {
+            if (filtering) return;
+            filtering = true;
+            var visible = moments.filter(function (m) { return !m.classList.contains("is-hidden"); });
+            var firstTops = new Map();
+            visible.forEach(function (m) { firstTops.set(m, m.getBoundingClientRect().top); });
+
+            var show = function (m) { return key === "all" || m.dataset.tag === key; };
+            var leaving = visible.filter(function (m) { return !show(m); });
+            leaving.forEach(function (m) { m.classList.add("is-leaving"); });
+
+            setTimeout(function () {
+                leaving.forEach(function (m) {
+                    m.classList.add("is-hidden");
+                    m.classList.remove("is-leaving");
+                });
+                var entering = [];
+                moments.forEach(function (m) {
+                    if (show(m) && m.classList.contains("is-hidden")) {
+                        m.classList.remove("is-hidden");
+                        if (!firstTops.has(m)) entering.push(m);
+                    }
+                });
+                entering.forEach(function (m) {
+                    m.style.transition = "none";
+                    m.style.opacity = "0";
+                });
+                var staying = moments.filter(function (m) { return show(m) && firstTops.has(m); });
+                staying.forEach(function (m) {
+                    var delta = firstTops.get(m) - m.getBoundingClientRect().top;
+                    if (Math.abs(delta) > 2) {
+                        m.style.transition = "none";
+                        m.style.transform = "translateY(" + delta + "px)";
+                    }
+                });
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        staying.forEach(function (m) {
+                            m.style.transition = "transform .45s cubic-bezier(0.16,1,0.3,1)";
+                            m.style.transform = "";
+                        });
+                        entering.forEach(function (m) {
+                            m.style.transition = "opacity .45s cubic-bezier(0.16,1,0.3,1)";
+                            m.style.opacity = "";
+                        });
+                    });
+                });
+                setTimeout(function () {
+                    moments.forEach(function (m) {
+                        m.style.transition = "";
+                        m.style.transform = "";
+                        m.style.opacity = "";
+                    });
+                    updateMeta(key);
+                    cacheDots();
+                    cacheParallax();
+                    requestAnimationFrame(frame);
+                    filtering = false;
+                }, 500);
+            }, 250);
+        }
+
+        chips.forEach(function (chip) {
+            chip.addEventListener("click", function () {
+                if (filtering) return;
+                setChip(chip);
+                var key = chip.dataset.filter;
+                if (reduced) applyFilterInstant(key);
+                else applyFilterFlip(key);
+            });
+        });
+
+        /* Restore filter from URL */
+        var urlFilter = new URLSearchParams(location.search).get("filter");
+        if (urlFilter && tagCounts[urlFilter]) {
+            var target = document.querySelector('.yr-chip[data-filter="' + urlFilter + '"]');
+            if (target) {
+                setChip(target);
+                applyFilterInstant(urlFilter);
+            }
+        }
+
+        /* ── Active chapter in the rail ── */
+        var railLinks = document.querySelectorAll("[data-rail]");
+        var chapterObs = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var id = entry.target.dataset.chapter;
+                    railLinks.forEach(function (l) {
+                        l.classList.toggle("is-active", l.dataset.rail === id);
+                    });
+                });
+            },
+            { rootMargin: "-30% 0px -60% 0px" }
+        );
+        document.querySelectorAll("[data-chapter]").forEach(function (s) {
+            chapterObs.observe(s);
+        });
+
+        /* ── Lightbox ── */
+        var lightbox = document.querySelector(".yr-lightbox");
+        if (lightbox && typeof lightbox.showModal === "function") {
+            var lbImg = lightbox.querySelector("img");
+            var lbCaption = lightbox.querySelector(".yr-lb-caption");
+            var lbCount = lightbox.querySelector(".yr-lb-count");
+            var track = document.querySelector(".yr-strip-track");
+            var lbIdx = 0;
+            var lastTrigger = null;
+
+            function lbShow(idx, animate) {
+                lbIdx = (idx + stripData.length) % stripData.length;
+                var item = stripData[lbIdx];
+                var swap = function () {
+                    lbImg.src = item.src;
+                    lbCaption.textContent = item.label;
+                    lbCount.textContent = (lbIdx + 1) + " / " + stripData.length;
+                };
+                if (animate && !reduced) {
+                    lbImg.classList.remove("is-in");
+                    swap();
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () { lbImg.classList.add("is-in"); });
+                    });
+                } else {
+                    swap();
+                    lbImg.classList.add("is-in");
+                }
+                [lbIdx - 1, lbIdx + 1].forEach(function (n) {
+                    var pre = new Image();
+                    pre.src = stripData[(n + stripData.length) % stripData.length].src;
+                });
+            }
+
+            document.querySelectorAll(".yr-strip-btn").forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    lastTrigger = btn;
+                    lbShow(parseInt(btn.dataset.idx, 10), false);
+                    lightbox.showModal();
+                    if (track) track.classList.add("is-paused");
+                });
+            });
+
+            lightbox.querySelector(".yr-lb-prev").addEventListener("click", function () { lbShow(lbIdx - 1, true); });
+            lightbox.querySelector(".yr-lb-next").addEventListener("click", function () { lbShow(lbIdx + 1, true); });
+            lightbox.querySelector(".yr-lb-close").addEventListener("click", function () { lightbox.close(); });
+            lightbox.addEventListener("keydown", function (e) {
+                if (e.key === "ArrowLeft") { e.preventDefault(); lbShow(lbIdx - 1, true); }
+                if (e.key === "ArrowRight") { e.preventDefault(); lbShow(lbIdx + 1, true); }
+            });
+            var justSwiped = false;
+            lightbox.addEventListener("click", function (e) {
+                if (justSwiped) return;
+                if (e.target === lightbox) lightbox.close();
+            });
+            lightbox.addEventListener("close", function () {
+                if (track) track.classList.remove("is-paused");
+                if (lastTrigger) lastTrigger.focus();
+            });
+            var swipeX = null;
+            lightbox.addEventListener("pointerdown", function (e) { swipeX = e.clientX; });
+            lightbox.addEventListener("pointerup", function (e) {
+                if (swipeX === null) return;
+                var dx = e.clientX - swipeX;
+                if (Math.abs(dx) > 40) {
+                    justSwiped = true;
+                    setTimeout(function () { justSwiped = false; }, 150);
+                    lbShow(lbIdx + (dx > 40 ? -1 : 1), true);
+                }
+                swipeX = null;
+            });
+        }
+
+        /* ── Constellation: tap/click toggles labels ── */
+        var openStar = null;
+        document.querySelectorAll(".yr-sky-star").forEach(function (starBtn) {
+            starBtn.setAttribute("aria-expanded", "false");
+            starBtn.addEventListener("click", function () {
+                var isOpen = starBtn.classList.contains("is-open");
+                if (openStar) {
+                    openStar.classList.remove("is-open");
+                    openStar.setAttribute("aria-expanded", "false");
+                }
+                if (!isOpen) {
+                    starBtn.classList.add("is-open");
+                    starBtn.setAttribute("aria-expanded", "true");
+                    openStar = starBtn;
+                } else {
+                    openStar = null;
+                }
+            });
+        });
+
+        /* ── Pulse readout ── */
+        var pulseReadout = document.querySelector(".yr-pulse-readout");
+        document.querySelectorAll(".yr-pulse-bar").forEach(function (bar) {
+            bar.addEventListener("mouseenter", function () {
+                if (pulseReadout) pulseReadout.textContent = bar.dataset.note;
+            });
+        });
+
+        /* ── Share + chapter anchors ── */
+        function legacyCopy(text) {
+            return new Promise(function (resolve, reject) {
+                var input = document.createElement("input");
+                input.readOnly = true;
+                input.value = text;
+                input.style.position = "fixed";
+                input.style.opacity = "0";
+                document.body.appendChild(input);
+                input.select();
+                var ok = document.execCommand("copy");
+                document.body.removeChild(input);
+                ok ? resolve() : reject();
+            });
+        }
+
+        function copyText(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text).catch(function () {
+                    return legacyCopy(text);
+                });
+            }
+            return legacyCopy(text);
+        }
+
+        function flashSwap(el, live, message) {
+            el.classList.add("is-done");
+            if (live) live.textContent = message;
+            setTimeout(function () {
+                el.classList.remove("is-done");
+                if (live) live.textContent = "";
+            }, 1500);
+        }
+
+        var shareBtn = document.querySelector(".yr-share");
+        var shareLive = document.querySelector(".yr-share-live");
+        if (shareBtn) {
+            shareBtn.addEventListener("click", function () {
+                var url = location.origin + location.pathname;
+                if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
+                    navigator.share({ title: "North Star — Year One", url: url }).catch(function () {});
+                } else {
+                    copyText(url).then(function () {
+                        flashSwap(shareBtn, shareLive, "Link copied to clipboard");
+                    }).catch(function () {});
+                }
+            });
+        }
+
+        document.querySelectorAll(".yr-anchor").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                var url = location.origin + location.pathname + "#" + btn.dataset.anchor;
+                copyText(url).then(function () {
+                    flashSwap(btn, shareLive, "Chapter link copied to clipboard");
+                }).catch(function () {});
+            });
+        });
+    })();
+</script>
+
+<style is:global>
+    body:has(.yr-page) {
+        overflow-x: clip;
+    }
+
+    .yr-page {
+        --yr-hair: rgba(255, 255, 255, 0.06);
+        --yr-hair-hover: rgba(255, 255, 255, 0.18);
+        --img-filter: brightness(0.58) saturate(0.75);
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 clamp(1.5rem, 4vw, 3rem) clamp(4rem, 8vh, 7rem);
+        color: #fff;
+    }
+
+    /* ── Skip link ── */
+    .yr-skip {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 100;
+        font-family: "Geist", sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0f0e0c;
+        background: #ffffffe0;
+        border-radius: 9999px;
+        padding: 0.55rem 1rem;
+        text-decoration: none;
+        transform: translateY(-250%);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-skip:focus-visible {
+        transform: none;
+    }
+
+    /* ── Shared focus ring ── */
+    :where(.yr-chip, .yr-cta, .yr-rail-link, .yr-moment-title a, .yr-anchor,
+        .yr-share, .yr-strip-btn, .yr-pulse-bar, .yr-more summary,
+        .yr-sky-star):focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 3px;
+    }
+
+    /* ── Reveal ── */
+    @media (scripting: enabled) {
+        .yr-page [data-reveal] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition:
+                opacity 0.75s cubic-bezier(0.2, 0.85, 0.25, 1),
+                transform 0.75s cubic-bezier(0.2, 0.85, 0.25, 1);
+        }
+        .yr-page [data-reveal].is-revealed {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    /* ── Hero ── */
+    .yr-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        min-height: min(88dvh, 780px);
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .yr-hero-bleed {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+    .yr-hero-bleed img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        filter: brightness(0.4) saturate(0.6);
+    }
+    .yr-hero-bleed::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(ellipse at center, transparent 30%, #0f0e0c 100%),
+            linear-gradient(to right, #0f0e0cd9, transparent 58%),
+            linear-gradient(to bottom, #0f0e0cb8, transparent 40%, #0f0e0c 96%);
+    }
+    .yr-hero-inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: clamp(5rem, 12vh, 8rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 5vh, 3.5rem);
+    }
+    .yr-ghost {
+        position: absolute;
+        top: 50%;
+        right: 2vw;
+        margin-top: -0.5em;
+        font-family: "Geist", sans-serif;
+        font-weight: 700;
+        font-size: clamp(9rem, 24vw, 20rem);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+        letter-spacing: -0.04em;
+        pointer-events: none;
+        user-select: none;
+        z-index: 1;
+        opacity: 0.9;
+        will-change: transform, opacity;
+        -webkit-text-stroke-width: 1.2px;
+        -webkit-text-stroke-color: rgba(255, 255, 255, 0.16);
+    }
+    .yr-eyebrow {
+        font-family: "Geist", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #ffffff9e;
+        margin: 0 0 1rem;
+    }
+    .yr-title {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(3.4rem, 9vw, 6.5rem);
+        line-height: 1;
+        color: #ffffffeb;
+        margin: 0 0 1.4rem;
+    }
+    .yr-sub {
+        font-family: "Geist", sans-serif;
+        font-size: 0.96rem;
+        line-height: 1.7;
+        letter-spacing: 0.02em;
+        color: #ffffffb8;
+        max-width: 34rem;
+        margin: 0;
+    }
+    .yr-mask {
+        display: block;
+        overflow: hidden;
+    }
+    .yr-mask > span {
+        display: block;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        .yr-hero-bleed img {
+            animation: yr-cover 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .yr-mask > span {
+            animation: yr-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation-delay: calc(0.25s + var(--i, 0) * 0.12s);
+        }
+    }
+    @keyframes yr-cover {
+        from { opacity: 0; transform: scale(1.06); }
+        to { opacity: 1; transform: none; }
+    }
+    @keyframes yr-rise {
+        from { transform: translateY(110%); }
+        to { transform: none; }
+    }
+    .yr-scroll-cue {
+        margin-top: clamp(2rem, 5vh, 3.5rem);
+        width: 1px;
+        height: 52px;
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    .yr-scroll-cue span {
+        position: absolute;
+        top: -40%;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: rgba(255, 255, 255, 0.55);
+        animation: yr-cue 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    }
+    @keyframes yr-cue {
+        0% { top: -40%; }
+        70%, 100% { top: 110%; }
+    }
+
+    /* ── Proof bar ── */
+    .yr-proof {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding: clamp(1.5rem, 3vw, 2.2rem) 0;
+        border-top: 1px solid var(--yr-hair);
+        border-bottom: 1px solid var(--yr-hair);
+    }
+    .yr-proof-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+    .yr-proof-value {
+        font-family: "Geist", sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.4rem, 3vw, 2.4rem);
+        color: #ffffffd1;
+        font-variant-numeric: tabular-nums;
+        display: inline-block;
+    }
+    .yr-proof-value.is-settled {
+        animation: yr-settle 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes yr-settle {
+        0% { transform: scale(1.04); }
+        100% { transform: scale(1); }
+    }
+    .yr-proof-label {
+        font-family: "Geist", sans-serif;
+        font-size: clamp(0.68rem, 1vw, 0.78rem);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.4);
+    }
+    .yr-proof-sep {
+        width: 1px;
+        height: 2.5rem;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ── Filters ── */
+    .yr-filters {
+        padding: clamp(1.8rem, 4vh, 2.8rem) 0 0.9rem;
+        position: sticky;
+        top: calc(env(safe-area-inset-top) + 0.5rem);
+        z-index: 20;
+        background: linear-gradient(to bottom, #0f0e0c 78%, transparent);
+    }
+    @media (min-width: 1024px) {
+        .yr-filters {
+            top: 5.5rem;
+        }
+    }
+    .yr-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .yr-chip {
+        font-family: "Geist", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.47);
+        background: #0f0e0c;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 9999px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.15s;
+        touch-action: manipulation;
+    }
+    .yr-chip:hover {
+        color: rgba(255, 255, 255, 0.62);
+        border-color: var(--yr-hair-hover);
+    }
+    .yr-chip:active {
+        transform: scale(0.98);
+    }
+    .yr-chip[aria-pressed="true"] {
+        color: #0f0e0c;
+        background: #ffffffe0;
+        border-color: transparent;
+    }
+    .yr-chip-count {
+        margin-left: 0.4rem;
+        opacity: 0.55;
+        font-variant-numeric: tabular-nums;
+    }
+    .yr-visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        margin: 0;
+    }
+
+    /* ── Body grid ── */
+    .yr-body {
+        display: grid;
+        grid-template-columns: 0.62fr 1.38fr;
+        gap: clamp(1.5rem, 4vw, 4rem);
+        align-items: start;
+        padding-top: clamp(1.5rem, 3vh, 2.5rem);
+    }
+    .yr-rail {
+        position: sticky;
+        top: clamp(10rem, 18vh, 11.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .yr-rail-link {
+        display: flex;
+        align-items: baseline;
+        gap: 0.9rem;
+        padding: 0.85rem 0.75rem;
+        text-decoration: none;
+        border-left: 1px solid var(--yr-hair);
+        transition: border-color 0.3s, background 0.3s;
+    }
+    .yr-rail-link:hover {
+        background: rgba(255, 255, 255, 0.02);
+    }
+    .yr-rail-link.is-active {
+        border-left-color: #fe7743;
+    }
+    .yr-rail-numeral {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: 1.5rem;
+        color: #ffffff47;
+        min-width: 1.6rem;
+        transition: color 0.3s;
+    }
+    .yr-rail-link.is-active .yr-rail-numeral {
+        color: #fe7743;
+    }
+    .yr-rail-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+    .yr-rail-title {
+        font-family: "Geist", sans-serif;
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: #ffffff9e;
+    }
+    .yr-rail-link.is-active .yr-rail-title {
+        color: #ffffffe0;
+    }
+    .yr-rail-period {
+        font-family: "Geist", sans-serif;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff2e;
+    }
+
+    /* ── Timeline ── */
+    .yr-timeline {
+        position: relative;
+        padding-left: clamp(1.6rem, 3vw, 2.4rem);
+        outline: none;
+    }
+    .yr-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 5px;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255, 255, 255, 0.1) 4%,
+            rgba(255, 255, 255, 0.1) 96%,
+            transparent
+        );
+    }
+    .yr-line-trail {
+        position: absolute;
+        inset: 0;
+        width: 1px;
+        background: #fe7743;
+        opacity: 0.55;
+        transform-origin: top;
+        transform: scaleY(0);
+        will-change: transform;
+    }
+    .yr-line-star {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 22px;
+        height: 22px;
+        color: #fe7743;
+        transform: translateX(-50%);
+        will-change: transform;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        .yr-star-core {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: yr-breathe 4s ease-in-out infinite;
+        }
+    }
+    @keyframes yr-breathe {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(0.86); opacity: 0.75; }
+    }
+
+    .yr-chapter {
+        position: relative;
+        padding-bottom: clamp(2rem, 5vh, 3.5rem);
+        scroll-margin-top: 10rem !important;
+    }
+    .yr-chapter-ghost {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: clamp(10rem, 22vw, 18rem);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+        pointer-events: none;
+        user-select: none;
+        will-change: transform;
+    }
+    .yr-chapter-head {
+        position: relative;
+        z-index: 1;
+        padding: clamp(2.5rem, 6vh, 4rem) 0 clamp(1.5rem, 3vh, 2.2rem);
+        transition: opacity 0.3s;
+    }
+    .yr-chapter-head.is-thinned {
+        opacity: 0.4;
+    }
+    .yr-chapter-numeral {
+        display: block;
+        font-family: "Geist", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #ffffff47;
+        margin-bottom: 0.6rem;
+    }
+    .yr-chapter-title {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.9rem, 4vw, 2.8rem);
+        line-height: 1.05;
+        color: #ffffffe0;
+        margin: 0 0 0.4rem;
+    }
+    .yr-anchor {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+        margin-left: 0.6rem;
+        padding: 0.3rem;
+        background: none;
+        border: none;
+        color: #ffffff9e;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.25s, transform 0.15s;
+    }
+    .yr-chapter-head:hover .yr-anchor,
+    .yr-anchor:focus-visible {
+        opacity: 0.4;
+    }
+    .yr-anchor:hover {
+        opacity: 0.7 !important;
+    }
+    .yr-anchor:active {
+        transform: scale(0.98);
+    }
+    .yr-chapter-period {
+        font-family: "Geist", sans-serif;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #ffffff47;
+    }
+
+    /* ── Moments ── */
+    .yr-moment {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+        padding: clamp(1.4rem, 3vh, 2rem) 0;
+        border-top: 1px solid var(--yr-hair);
+        transition: border-color 0.3s;
+    }
+    .yr-moment.has-image {
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: center;
+    }
+    .yr-moment.has-image:nth-of-type(even) .yr-moment-img {
+        order: -1;
+    }
+    .yr-moment:hover {
+        border-top-color: var(--yr-hair-hover);
+    }
+    .yr-moment.is-hidden {
+        display: none;
+    }
+    .yr-moment.is-leaving {
+        opacity: 0 !important;
+        transform: translateY(8px) scale(0.985) !important;
+        transition-duration: 0.25s !important;
+    }
+    .yr-dot {
+        position: absolute;
+        left: calc(-1 * clamp(1.6rem, 3vw, 2.4rem) - 5px + 2.5px);
+        top: clamp(1.8rem, 3.4vh, 2.4rem);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.28);
+        transform: translateX(-50%);
+        transition: background-color 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-dot.is-lit,
+    .yr-moment:hover .yr-dot,
+    .yr-moment:focus-within .yr-dot {
+        background: #fe7743;
+        transform: translateX(-50%) scale(1.5);
+    }
+    .yr-moment-meta {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-bottom: 0.55rem;
+    }
+    .yr-moment-meta time {
+        font-family: "Geist", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff9e;
+        font-variant-numeric: tabular-nums;
+        transition: color 0.3s;
+    }
+    .yr-moment:hover .yr-moment-meta time {
+        color: #ffffffe0;
+    }
+    .yr-tag {
+        font-family: "Geist", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff47;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 9999px;
+        padding: 0.18rem 0.6rem;
+    }
+    .yr-tag-dim {
+        color: #ffffff2e;
+        border-style: dashed;
+    }
+    .yr-first {
+        font-family: "Geist", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #fe7743;
+    }
+    .yr-moment-title {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.4rem, 2.8vw, 2rem);
+        line-height: 1.12;
+        color: #ffffffe0;
+        margin: 0;
+    }
+    .yr-moment-title a {
+        color: inherit;
+        text-decoration: none;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 0% 1px;
+        transition: color 0.25s, background-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-moment-title a:hover {
+        color: #fff;
+        background-size: 100% 1px;
+    }
+    .yr-moment-desc {
+        font-family: "Geist", sans-serif;
+        font-size: 0.86rem;
+        line-height: 1.55;
+        letter-spacing: 0.02em;
+        color: #fff6;
+        max-width: 26rem;
+        margin: 0.55rem 0 0;
+    }
+    .yr-moment-img.is-contain img {
+        object-fit: contain;
+        padding: 18%;
+        filter: none;
+        opacity: 0.5;
+        transform: none;
+    }
+    .yr-moment-img.is-contain::after {
+        display: none;
+    }
+    .yr-moment:hover .yr-moment-img.is-contain img {
+        opacity: 0.8;
+        filter: none;
+        transform: none;
+    }
+    .yr-stat {
+        display: inline-block;
+        margin-top: 0.7rem;
+        font-family: "Geist", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff9e;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        padding-bottom: 0.25rem;
+    }
+    .yr-moment-img {
+        position: relative;
+        display: block;
+        border-radius: 0.8rem;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+        background: rgba(255, 255, 255, 0.03);
+    }
+    .yr-moment-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, #000000b8, #00000040 45%, #0000000d);
+        pointer-events: none;
+    }
+    .yr-moment-img.is-poster img {
+        filter: brightness(0.5) saturate(0.55);
+    }
+    .yr-moment-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: var(--img-filter);
+        transform: scale(1.06);
+        transition:
+            filter 0.6s cubic-bezier(0.2, 0.85, 0.25, 1),
+            transform 0.6s cubic-bezier(0.2, 0.85, 0.25, 1);
+    }
+    .yr-moment:hover .yr-moment-img img {
+        filter: brightness(0.88) saturate(1);
+        transform: scale(1);
+    }
+
+    /* ── More ledger ── */
+    .yr-more {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid var(--yr-hair);
+    }
+    .yr-more summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+        cursor: pointer;
+        font-family: "Geist", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff47;
+        padding: 1rem 0;
+        transition: color 0.25s;
+    }
+    .yr-more summary::-webkit-details-marker {
+        display: none;
+    }
+    .yr-more summary:hover {
+        color: rgba(255, 255, 255, 0.62);
+    }
+    .yr-more summary svg {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-more[open] summary svg {
+        transform: rotate(45deg);
+    }
+    .yr-more-body {
+        padding-bottom: 0.8rem;
+    }
+    .yr-more-title {
+        font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    }
+    @supports (interpolate-size: allow-keywords) {
+        .yr-more {
+            interpolate-size: allow-keywords;
+        }
+        .yr-more::details-content {
+            opacity: 0;
+            block-size: 0;
+            overflow-y: clip;
+            transition: content-visibility 0.4s allow-discrete, opacity 0.4s, block-size 0.4s;
+        }
+        .yr-more[open]::details-content {
+            opacity: 1;
+            block-size: auto;
+        }
+    }
+
+    /* ── Quotes ── */
+    .yr-quote {
+        position: relative;
+        margin: clamp(3rem, 8vh, 5.5rem) 0;
+        padding-left: 2rem;
+    }
+    .yr-quote-left {
+        padding-left: max(2rem, 8%);
+    }
+    .yr-quote-right {
+        padding-left: max(2rem, 30%);
+    }
+    .yr-quote-charter {
+        margin-top: clamp(4rem, 10vh, 7rem);
+    }
+    .yr-quote[data-reveal] {
+        opacity: 1;
+        transform: none;
+    }
+    .yr-quote-star {
+        position: absolute;
+        left: 0;
+        top: 0.5em;
+        width: 0.9rem;
+        height: 0.9rem;
+        color: #fe7743;
+    }
+    .yr-quote-right .yr-quote-star {
+        left: calc(max(2rem, 30%) - 2rem);
+    }
+    .yr-quote-left .yr-quote-star {
+        left: calc(max(2rem, 8%) - 2rem);
+    }
+    .yr-quote blockquote {
+        margin: 0;
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: clamp(1.7rem, 4vw, 2.8rem);
+        line-height: 1.2;
+        color: #ffffffe0;
+        max-width: 24ch;
+    }
+    .yr-q-line {
+        display: block;
+        overflow: hidden;
+    }
+    .yr-q-line > span {
+        display: block;
+        transform: translateY(110%);
+        transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: calc(var(--l, 0) * 0.1s);
+    }
+    .is-revealed .yr-q-line > span {
+        transform: none;
+    }
+    .yr-quote figcaption {
+        margin-top: 1rem;
+        font-family: "Geist", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff47;
+    }
+
+    /* ── Firsts grid ── */
+    .yr-section-title {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+        color: #ffffffe0;
+        margin: 0 0 clamp(1.5rem, 3vh, 2.2rem);
+    }
+    .yr-firsts {
+        padding-top: clamp(3rem, 7vh, 5rem);
+    }
+    .yr-firsts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--yr-hair);
+        border-left: 1px solid var(--yr-hair);
+    }
+    .yr-first-card {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding: clamp(1.3rem, 2.6vw, 2rem);
+        border-right: 1px solid var(--yr-hair);
+        border-bottom: 1px solid var(--yr-hair);
+        transition-delay: calc(var(--i, 0) * 80ms);
+    }
+    .yr-first-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        opacity: 0;
+        filter: var(--img-filter) brightness(0.45);
+        transition: opacity 0.5s cubic-bezier(0.2, 0.85, 0.25, 1);
+        pointer-events: none;
+    }
+    .yr-first-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: linear-gradient(to top, #0f0e0c 10%, #0f0e0cb0);
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.2, 0.85, 0.25, 1);
+        pointer-events: none;
+    }
+    @media (hover: hover) {
+        .yr-first-card:hover .yr-first-bg,
+        .yr-first-card:hover::after {
+            opacity: 1;
+        }
+    }
+    .yr-first-card > span {
+        position: relative;
+        z-index: 1;
+    }
+    .yr-first-star {
+        color: #fe7743;
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+    }
+    [data-reveal].yr-first-card .yr-first-star {
+        opacity: 0;
+        transform: scale(0.5) rotate(-45deg);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: calc(var(--i, 0) * 80ms + 0.25s);
+    }
+    [data-reveal].yr-first-card.is-revealed .yr-first-star {
+        opacity: 1;
+        transform: none;
+    }
+    .yr-first-label {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+        color: #ffffffe0;
+        line-height: 1.2;
+    }
+    .yr-first-detail {
+        font-family: "Geist", sans-serif;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        color: #fff6;
+    }
+    .yr-first-date {
+        font-family: "Geist", sans-serif;
+        font-size: 0.66rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff47;
+        margin-top: auto;
+        padding-top: 0.5rem;
+    }
+
+    /* ── Film strip ── */
+    .yr-strip {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-top: clamp(3.5rem, 8vh, 6rem);
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .yr-strip-track {
+        display: flex;
+        gap: 0.5rem;
+        width: max-content;
+        animation: yr-marquee 70s linear infinite;
+    }
+    .yr-strip:hover .yr-strip-track,
+    .yr-strip-track.is-paused {
+        animation-play-state: paused;
+    }
+    .yr-strip-btn {
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: zoom-in;
+        border-radius: 0.6rem;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+    .yr-strip-btn img {
+        display: block;
+        height: clamp(150px, 22vw, 230px);
+        width: auto;
+        filter: brightness(0.62) saturate(0.8);
+        transition: filter 0.5s cubic-bezier(0.2, 0.85, 0.25, 1);
+    }
+    .yr-strip-btn:hover img,
+    .yr-strip-btn:focus-visible img {
+        filter: brightness(0.95) saturate(1);
+    }
+    @keyframes yr-marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    /* ── Lightbox ── */
+    .yr-lightbox {
+        background: transparent;
+        border: none;
+        padding: 0;
+        max-width: min(94vw, 1100px);
+        outline: none;
+    }
+    .yr-lightbox::backdrop {
+        background: rgba(15, 14, 12, 0.95);
+    }
+    .yr-lightbox figure {
+        margin: 0;
+    }
+    .yr-lightbox img {
+        display: block;
+        max-width: 100%;
+        max-height: 74vh;
+        margin: 0 auto;
+        border-radius: 0.8rem;
+        opacity: 0;
+        transform: scale(0.985);
+    }
+    .yr-lightbox img.is-in {
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-lightbox figcaption {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 0.9rem;
+        font-family: "Geist", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff9e;
+    }
+    .yr-lb-count {
+        font-variant-numeric: tabular-nums;
+        color: #ffffff47;
+    }
+    .yr-lb-controls {
+        display: flex;
+        justify-content: center;
+        gap: 0.6rem;
+        margin-top: 1.1rem;
+    }
+
+    /* ── Growth ── */
+    .yr-growth {
+        padding-top: clamp(2rem, 5vh, 3.5rem);
+    }
+    .yr-growth-sub {
+        font-family: "Geist", sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #fff6;
+        max-width: 34rem;
+        margin: -0.8rem 0 clamp(1.8rem, 4vh, 2.6rem);
+    }
+    .yr-gline-wrap {
+        border-top: 1px solid var(--yr-hair);
+        padding-top: clamp(1.4rem, 3vh, 2rem);
+    }
+    .yr-gline {
+        width: 100%;
+        height: clamp(120px, 22vw, 220px);
+        display: block;
+        overflow: visible;
+    }
+    .yr-gline-path {
+        fill: none;
+        stroke: rgba(254, 119, 67, 0.55);
+        stroke-width: 1.5;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+    }
+    .is-revealed .yr-gline-path {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1.8s cubic-bezier(0.2, 0.85, 0.25, 1) 0.2s;
+    }
+    .yr-gline-marker {
+        fill: rgba(255, 255, 255, 0.55);
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--d, 0.4s);
+    }
+    .yr-gline-marker[data-final] {
+        fill: #fe7743;
+    }
+    .is-revealed .yr-gline-marker {
+        opacity: 1;
+    }
+    .yr-growth-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        border-bottom: 1px solid var(--yr-hair);
+        padding: clamp(0.8rem, 2vh, 1.4rem) 0 clamp(1.4rem, 3vh, 2rem);
+    }
+    .yr-growth-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .yr-growth-item:last-child {
+        text-align: right;
+    }
+    .yr-growth-value {
+        font-family: "Geist", sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.2rem, 2.6vw, 1.9rem);
+        color: #ffffffd1;
+        font-variant-numeric: tabular-nums;
+        display: inline-block;
+    }
+    .yr-growth-value.is-settled {
+        animation: yr-settle 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-growth-label {
+        font-family: "Geist", sans-serif;
+        font-size: 0.66rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.4);
+    }
+    .yr-growth-date {
+        font-family: "Geist", sans-serif;
+        font-size: 0.66rem;
+        color: #ffffff47;
+    }
+
+    /* ── Pulse ── */
+    .yr-pulse {
+        padding-top: clamp(1.6rem, 3.5vh, 2.4rem);
+    }
+    .yr-pulse-readout {
+        font-family: "Geist", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+        color: #ffffff47;
+        margin: 0 0 0.9rem;
+        min-height: 1em;
+    }
+    .yr-pulse-strip {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.35rem;
+        height: 110px;
+    }
+    .yr-pulse-bar {
+        flex: 1;
+        min-width: 24px;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .yr-pulse-bar span {
+        display: block;
+        width: 100%;
+        height: max(calc(var(--h) * 100%), 2px);
+        background: rgba(255, 255, 255, 0.14);
+        border-radius: 1px;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s;
+        transition-delay: calc(var(--i, 0) * 40ms);
+    }
+    .is-revealed .yr-pulse-bar span {
+        transform: none;
+    }
+    .yr-pulse-bar:hover span,
+    .yr-pulse-bar:focus-visible span {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    .yr-pulse-bar[data-peak] span {
+        background: rgba(254, 119, 67, 0.45);
+    }
+    .yr-pulse-bar[data-peak]:hover span,
+    .yr-pulse-bar[data-peak]:focus-visible span {
+        background: rgba(254, 119, 67, 0.7);
+    }
+    .yr-pulse-meta {
+        font-family: "Geist", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        color: #ffffff47;
+        font-variant-numeric: tabular-nums;
+        margin: 1rem 0 0;
+    }
+
+    /* ── Ahead ── */
+    .yr-ahead {
+        padding-top: clamp(3.5rem, 8vh, 6rem);
+    }
+    .yr-ahead-list {
+        border-top: 1px solid var(--yr-hair);
+    }
+    .yr-ahead-row {
+        display: grid;
+        grid-template-columns: 0.35fr 0.85fr 1fr;
+        gap: 1rem;
+        align-items: baseline;
+        padding: 1.1rem 0;
+        border-bottom: 1px solid var(--yr-hair);
+        transition: border-color 0.3s;
+    }
+    .yr-ahead-row:hover {
+        border-bottom-color: var(--yr-hair-hover);
+    }
+    .yr-ahead-date {
+        font-family: "Geist", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff9e;
+        font-variant-numeric: tabular-nums;
+    }
+    .yr-ahead-title {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: clamp(1.05rem, 2vw, 1.3rem);
+        color: #ffffffe0;
+    }
+    .yr-ahead-note {
+        font-family: "Geist", sans-serif;
+        font-size: 0.78rem;
+        color: #fff6;
+    }
+
+    /* ── Constellation ── */
+    .yr-sky {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-top: clamp(3rem, 7vh, 5rem);
+        min-height: 100dvh;
+        overflow: hidden;
+    }
+    .yr-sky[data-reveal] {
+        opacity: 1;
+        transform: none;
+    }
+    .yr-sky-lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .yr-sky-lines line {
+        stroke: rgba(255, 255, 255, 0.08);
+        stroke-width: 1;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+    }
+    .is-revealed .yr-sky-lines line {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1.2s cubic-bezier(0.2, 0.85, 0.25, 1);
+        transition-delay: var(--d, 0.8s);
+    }
+    .yr-sky-star {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        scale: 0.5;
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), scale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: calc(var(--i, 0) * 60ms);
+    }
+    .is-revealed .yr-sky-star {
+        opacity: 1;
+        scale: 1;
+    }
+    .yr-sky-star svg {
+        width: 11px;
+        height: 11px;
+        color: rgba(255, 255, 255, 0.55);
+        transition: color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-sky-star:nth-child(3n) svg {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    .yr-sky-star:nth-child(4n) svg {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .yr-sky-star:hover svg,
+    .yr-sky-star:focus-visible svg {
+        color: #fff;
+        transform: scale(1.35);
+    }
+    .yr-sky-north svg {
+        width: 18px;
+        height: 18px;
+        color: #fe7743 !important;
+    }
+    .yr-sky-label {
+        position: absolute;
+        bottom: calc(100% + 0.35rem);
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        white-space: nowrap;
+        font-family: "Geist", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffffe0;
+        background: rgba(15, 14, 12, 0.92);
+        border: 1px solid var(--yr-hair);
+        border-radius: 9999px;
+        padding: 0.35rem 0.7rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 5;
+    }
+    .yr-sky-label em {
+        font-style: normal;
+        color: #ffffff47;
+        margin-left: 0.5em;
+    }
+    .yr-sky-star:hover .yr-sky-label,
+    .yr-sky-star:focus-visible .yr-sky-label,
+    .yr-sky-star.is-open .yr-sky-label {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    @media (pointer: coarse) {
+        .yr-sky-star {
+            width: 44px;
+            height: 44px;
+        }
+    }
+    .yr-sky-star:nth-child(-n+8) .yr-sky-label {
+        bottom: auto;
+        top: calc(100% + 0.35rem);
+    }
+    .yr-sky-quote {
+        position: absolute;
+        left: clamp(1.5rem, 8vw, 8rem);
+        top: 42%;
+        z-index: 2;
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        line-height: 1.25;
+        color: #ffffffe0;
+        max-width: 30ch;
+        pointer-events: none;
+    }
+    .yr-sky-quote .yr-q-line > span {
+        transition-delay: calc(2.2s + var(--l, 0) * 0.15s);
+    }
+    .yr-sky-attr {
+        display: block;
+        margin-top: 1rem;
+        font-family: "Geist", sans-serif;
+        font-style: normal;
+        font-size: 0.68rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff47;
+        opacity: 0;
+        transition: opacity 0.8s;
+        transition-delay: 2.8s;
+    }
+    .is-revealed .yr-sky-attr {
+        opacity: 1;
+    }
+
+    /* ── Close / CTAs ── */
+    .yr-close {
+        padding-top: clamp(2rem, 5vh, 3rem);
+    }
+    .yr-cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        justify-content: center;
+    }
+    .yr-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: "Geist", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.47);
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 9999px;
+        padding: 0.7rem 1.3rem;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.25s, border-color 0.25s, gap 0.25s, transform 0.15s;
+        touch-action: manipulation;
+    }
+    .yr-cta:hover {
+        color: rgba(255, 255, 255, 0.62);
+        border-color: var(--yr-hair-hover);
+        gap: 0.55rem;
+    }
+    .yr-cta:active {
+        transform: scale(0.98);
+    }
+
+    /* ── Swap (two-layer label crossfade) ── */
+    .yr-swap {
+        display: inline-grid;
+    }
+    .yr-swap-a,
+    .yr-swap-b {
+        grid-area: 1 / 1;
+        display: inline-flex;
+        align-items: center;
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .yr-swap-b {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    .is-done .yr-swap-a {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    .is-done .yr-swap-b {
+        opacity: 1;
+        transform: none;
+    }
+    .yr-share-live {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 860px) {
+        .yr-filters {
+            position: static;
+            background: none;
+        }
+        .yr-body {
+            grid-template-columns: 1fr;
+        }
+        .yr-rail {
+            position: static;
+            flex-direction: row;
+            overflow-x: auto;
+            gap: 0.5rem;
+            padding-bottom: 0.4rem;
+        }
+        .yr-rail-link {
+            border-left: none;
+            border-top: 1px solid var(--yr-hair);
+            padding: 0.6rem 0.7rem;
+            flex-shrink: 0;
+        }
+        .yr-rail-link.is-active {
+            border-top-color: #fe7743;
+        }
+        .yr-moment.has-image {
+            grid-template-columns: 1fr;
+        }
+        .yr-moment-img {
+            order: -1;
+            aspect-ratio: 16 / 9;
+        }
+        .yr-chapter-ghost {
+            font-size: clamp(6rem, 26vw, 9rem);
+            -webkit-text-stroke-color: rgba(255, 255, 255, 0.04);
+        }
+        .yr-quote-right {
+            padding-left: 2rem;
+        }
+        .yr-quote-right .yr-quote-star {
+            left: 0;
+        }
+        .yr-firsts-grid {
+            grid-template-columns: 1fr;
+            border-left: none;
+        }
+        .yr-first-card {
+            border-right: none;
+        }
+        .yr-growth-row {
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+        }
+        .yr-growth-item:last-child {
+            text-align: left;
+        }
+        .yr-ahead-row {
+            grid-template-columns: 1fr;
+            gap: 0.25rem;
+        }
+        .yr-ghost {
+            font-size: clamp(6rem, 26vw, 10rem);
+            right: 0.5rem;
+        }
+        .yr-sky {
+            min-height: 88dvh;
+        }
+        .yr-sky-quote {
+            top: auto;
+            bottom: 8%;
+        }
+        .yr-anchor {
+            opacity: 0.3;
+        }
+    }
+    @media (max-width: 640px) {
+        .yr-gline-wrap {
+            display: none;
+        }
+        .yr-growth-row {
+            border-top: 1px solid var(--yr-hair);
+            padding-top: 1.4rem;
+        }
+        .yr-pulse-strip {
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+        .yr-page [data-reveal] {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+        .yr-strip-track {
+            animation: none;
+        }
+        .yr-scroll-cue span {
+            animation: none;
+        }
+        .yr-line-star,
+        .yr-line-trail {
+            display: none;
+        }
+        .yr-q-line > span {
+            transform: none;
+            transition: none;
+        }
+        .yr-gline-path {
+            stroke-dashoffset: 0;
+            transition: none;
+        }
+        .yr-gline-marker {
+            opacity: 1;
+            transition: none;
+        }
+        .yr-pulse-bar span {
+            transform: none;
+            transition: none;
+        }
+        .yr-sky-lines line {
+            stroke-dashoffset: 0;
+            transition: none;
+        }
+        .yr-sky-star {
+            opacity: 1;
+            scale: 1;
+            transition: none;
+        }
+        .yr-sky-attr {
+            opacity: 1;
+            transition: none;
+        }
+        .yr-first-card .yr-first-star {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+        .yr-lightbox img {
+            opacity: 1;
+            transform: none;
+        }
+    }
+</style>
