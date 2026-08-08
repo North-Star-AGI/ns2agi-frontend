@@ -3,6 +3,11 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  # Daily rebuild so past-dated events roll out of "Upcoming" automatically.
+  # events.ts derives upcoming/past from new Date() at build time, which freezes
+  # on a static build; this re-evaluates it every day at 04:00 UTC.
+  schedule:
+    - cron: "0 4 * * *"
 
 permissions:
   contents: read
