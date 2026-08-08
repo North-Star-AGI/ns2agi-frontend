@@ -279,6 +279,16 @@ const rawEvents: EventItem[] = [
     link: "https://luma.com/4x89l3eh",
   },
   {
+    id: "ml6-brown-bag",
+    title: "Brown Bag Session @ML6",
+    date: "2026-08-13",
+    description: "Lunch-hour tech talks at ML6 Ghent: computer use agents, robotics navigation with the Unitree G1, and a North Star talk on West Flemish in AI.",
+    thumbnail: "/ml6-brown-bag/cover.jpg",
+    status: "upcoming",
+    organizationType: "CONTRIBUTED",
+    link: "https://luma.com/dbufi79e",
+  },
+  {
     id: "public-ai-hackathon-antwerp",
     title: "Public AI Hackathon · Antwerp",
     date: "2026-09-16",
