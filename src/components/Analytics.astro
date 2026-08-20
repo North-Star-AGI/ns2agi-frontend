@@ -1,0 +1,136 @@
+---
+export interface Props {
+    measurementId?: string;
+}
+
+const { measurementId } = Astro.props;
+const normalizedMeasurementId = measurementId?.trim();
+const hasValidMeasurementId = Boolean(
+    normalizedMeasurementId && /^G-[A-Z0-9]+$/i.test(normalizedMeasurementId),
+);
+---
+
+{hasValidMeasurementId && (
+    <>
+        <div
+            id="ns2agi-analytics-consent"
+            class="fixed inset-x-4 bottom-4 z-[10000] mx-auto max-w-xl rounded-2xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-2xl backdrop-blur md:inset-x-auto md:right-6 md:bottom-6"
+            role="dialog"
+            aria-labelledby="ns2agi-analytics-consent-title"
+            aria-describedby="ns2agi-analytics-consent-description"
+            hidden
+        >
+            <h2 id="ns2agi-analytics-consent-title" class="text-base font-medium">
+                Cookies and analytics
+            </h2>
+            <p id="ns2agi-analytics-consent-description" class="mt-2 text-sm leading-6 text-white/70">
+                We use Google Analytics to understand which pages and links are useful. It uses optional cookies and similar technologies, and you can change your choice later.
+            </p>
+            <div class="mt-4 flex flex-wrap justify-end gap-3">
+                <button
+                    type="button"
+                    data-analytics-consent="denied"
+                    class="min-h-11 rounded-full border border-white/20 px-4 text-sm text-white/75 transition-colors hover:border-white/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                    No thanks
+                </button>
+                <button
+                    type="button"
+                    data-analytics-consent="granted"
+                    class="min-h-11 rounded-full bg-white px-4 text-sm font-medium text-black transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                    Allow analytics
+                </button>
+            </div>
+        </div>
+        <button
+            id="ns2agi-analytics-settings"
+            type="button"
+            class="fixed bottom-4 left-4 z-[9999] min-h-10 rounded-full border border-white/20 bg-zinc-950/90 px-4 text-xs text-white/75 shadow-lg backdrop-blur transition-colors hover:border-white/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            hidden
+        >
+            Privacy settings
+        </button>
+
+        <script is:inline data-measurement-id={normalizedMeasurementId}>
+            (() => {
+                const currentScript = document.currentScript;
+                if (!(currentScript instanceof HTMLScriptElement)) return;
+
+                const measurementId = currentScript.dataset.measurementId;
+                if (!measurementId || !/^G-[A-Z0-9]+$/i.test(measurementId)) return;
+
+                const consentStorageKey = "ns2agi.analytics.consent";
+                const consentBanner = document.getElementById("ns2agi-analytics-consent");
+                const settingsButton = document.getElementById("ns2agi-analytics-settings");
+                const grantedButton = document.querySelector('[data-analytics-consent="granted"]');
+                const deniedButton = document.querySelector('[data-analytics-consent="denied"]');
+
+                const setBannerVisibility = (isVisible) => {
+                    if (!(consentBanner instanceof HTMLElement)) return;
+                    consentBanner.hidden = !isVisible;
+                    if (settingsButton instanceof HTMLElement) settingsButton.hidden = isVisible;
+                };
+
+                const initializeAnalytics = () => {
+                    if (window.__ns2agiAnalyticsInitialized) return;
+
+                    window.__ns2agiAnalyticsInitialized = true;
+                    window.dataLayer = window.dataLayer || [];
+                    window.gtag = function gtag() {
+                        window.dataLayer.push(arguments);
+                    };
+                    window.gtag("js", new Date());
+                    window.gtag("config", measurementId, { send_page_view: true });
+
+                    const analyticsScript = document.createElement("script");
+                    analyticsScript.async = true;
+                    analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+                    document.head.appendChild(analyticsScript);
+
+                    document.addEventListener("click", (event) => {
+                        if (!(event.target instanceof Element)) return;
+
+                        const link = event.target.closest("a[href]");
+                        if (!(link instanceof HTMLAnchorElement)) return;
+                        if (window.localStorage.getItem(consentStorageKey) !== "granted") return;
+
+                        const url = new URL(link.href, window.location.href);
+                        if (url.origin === window.location.origin) return;
+
+                        window.gtag("event", "click", {
+                            event_category: "outbound",
+                            event_label: url.href,
+                            transport_type: "beacon",
+                        });
+                    });
+                };
+
+                const saveConsent = (value) => {
+                    window.localStorage.setItem(consentStorageKey, value);
+                    setBannerVisibility(false);
+
+                    if (value === "granted") initializeAnalytics();
+                };
+
+                grantedButton?.addEventListener("click", () => saveConsent("granted"));
+                deniedButton?.addEventListener("click", () => saveConsent("denied"));
+                settingsButton?.addEventListener("click", () => setBannerVisibility(true));
+
+                const consent = window.localStorage.getItem(consentStorageKey);
+                if (consent === "granted") {
+                    initializeAnalytics();
+                    if (settingsButton instanceof HTMLElement) settingsButton.hidden = false;
+                    return;
+                }
+
+                if (consent === "denied") {
+                    if (settingsButton instanceof HTMLElement) settingsButton.hidden = false;
+                    return;
+                }
+
+                setBannerVisibility(true);
+            })();
+        </script>
+    </>
+)}

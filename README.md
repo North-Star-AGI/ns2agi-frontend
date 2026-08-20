@@ -48,6 +48,12 @@ All commands are run from the root of the project, from a terminal:
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 # ns2agi-frontend
 
+## Analytics
+
+The site includes an optional, consent-gated Google Analytics 4 integration. A cookie and analytics banner appears before tracking is enabled, and visitors can reopen Privacy settings later. It is fail-closed: when no valid measurement ID is configured, no analytics markup or Google request is emitted.
+
+To activate it in GitHub Pages, create a repository variable named `GA_MEASUREMENT_ID` containing the GA4 measurement ID. The deployment workflow exposes that public value as `PUBLIC_GA_MEASUREMENT_ID` at build time. Local verification can use `PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX pnpm dev`.
+
 
 
 Kids
@@ -76,5 +82,4 @@ Join button, Company? Work with us
 
 and our subbranches
 Kids and Robotics
-
 

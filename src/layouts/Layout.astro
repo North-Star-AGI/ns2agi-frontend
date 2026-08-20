@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Analytics from "../components/Analytics.astro";
 
 export interface Props {
     title?: string;
@@ -8,6 +9,7 @@ export interface Props {
 }
 
 const { title = "North Star", backgroundImageUrl } = Astro.props;
+const analyticsMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -156,5 +158,6 @@ const { title = "North Star", backgroundImageUrl } = Astro.props;
             </div>
             <Footer />
         </div>
+        <Analytics measurementId={analyticsMeasurementId} />
     </body>
 </html>
