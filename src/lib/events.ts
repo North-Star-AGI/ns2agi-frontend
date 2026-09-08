@@ -289,6 +289,16 @@ const rawEvents: EventItem[] = [
     link: "https://luma.com/dbufi79e",
   },
   {
+    id: "cafe-compute-brussels",
+    title: "Café Compute Meetup · Brussels",
+    date: "2026-09-12",
+    description: "A small builder session at BeCentral Brussels on what changes when inference stops being the bottleneck, with talks from GitLab, OpenAI, and Cerebras. Co-hosted with Cerebras by the Cerebras and Codex ambassadors.",
+    thumbnail: "/cafe-compute-brussels/cover.jpg",
+    status: "upcoming",
+    organizationType: "ORGANIZED",
+    link: "https://luma.com/cafecomputebrussels",
+  },
+  {
     id: "public-ai-hackathon-antwerp",
     title: "Public AI Hackathon · Antwerp",
     date: "2026-09-16",
@@ -298,6 +308,16 @@ const rawEvents: EventItem[] = [
     organizationType: "ORGANIZED",
     link: "/province",
     featured: true,
+  },
+  {
+    id: "astra-commons-ghent",
+    title: "Astra Commons · Ghent",
+    date: "2026-09-18",
+    description: "An afternoon at Bar Bougie in Ghent for the GPT-6 Astra launch: free coffee, hands-on time with the new model, and Codex plus API credits for registered attendees.",
+    thumbnail: "/astra-commons-ghent/cover.png",
+    status: "upcoming",
+    organizationType: "ORGANIZED",
+    link: "https://luma.com/2akmvt99",
   },
 ];
 
