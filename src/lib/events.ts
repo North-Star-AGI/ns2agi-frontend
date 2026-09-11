@@ -319,6 +319,16 @@ const rawEvents: EventItem[] = [
     organizationType: "ORGANIZED",
     link: "https://luma.com/2akmvt99",
   },
+  {
+    id: "wintercircus-robotics-asia",
+    title: "The Next Phase of Robotics Is Coming · Ghent",
+    date: "2026-09-29",
+    description: "A Wintercircus Collective evening in Ghent on how Belgium and Europe stack up against Asia in robotics, with imec, VUB Brubotics, ABC, and North Star's founder on stage.",
+    thumbnail: "/wintercircus-robotics/cover.jpg",
+    status: "upcoming",
+    organizationType: "CONTRIBUTED",
+    link: "https://www.wintercircus.be/nl/events/id/659",
+  },
 ];
 
 const todayISO = new Date().toISOString().slice(0, 10);
