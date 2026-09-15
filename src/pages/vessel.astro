@@ -208,6 +208,7 @@ const strip = [
           </svg>
         </a>
         <a href="/work-with-us" class="v2-btn v2-btn-secondary">Partner up</a>
+        <a href="mailto:filip@ns2agi.com?subject=Working%20with%20North%20Star" class="v2-keep-mail">or mail filip@ns2agi.com</a>
       </div>
     </section>
   </div>
@@ -750,7 +751,20 @@ const strip = [
   .v2-keep-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.7rem;
+  }
+  .v2-keep-mail {
+    font-family: "Geist", sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    padding: 0.5rem 0.2rem;
+    transition: color 220ms ease;
+  }
+  .v2-keep-mail:hover,
+  .v2-keep-mail:focus-visible {
+    color: rgba(255,255,255,0.92);
   }
 
   /* ── Map ── */

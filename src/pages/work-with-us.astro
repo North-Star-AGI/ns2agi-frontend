@@ -14,6 +14,13 @@ const team = [
 
   <!-- Contact form -->
   <section class="collab-form-section" id="contact">
+    <div class="collab-email">
+      <span class="collab-email-label">email directly</span>
+      <a href="mailto:filip@ns2agi.com?subject=Working%20with%20North%20Star" class="collab-email-link">
+        filip@ns2agi.com
+      </a>
+    </div>
+
     <div class="collab-form-wrap">
       <iframe
         data-tally-src="https://tally.so/embed/0QMBQ6?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
@@ -533,6 +540,35 @@ const team = [
   .collab-form-wrap iframe {
     width: 100%;
     border: none;
+  }
+  .collab-email {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    max-width: 640px;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .collab-email-label {
+    font-family: "Geist", sans-serif;
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+  }
+  .collab-email-link {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+  .collab-email-link:hover,
+  .collab-email-link:focus-visible {
+    color: rgba(255, 255, 255, 1);
   }
 
   /* ══════════════════════════════════
