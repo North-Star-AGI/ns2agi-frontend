@@ -142,7 +142,6 @@ const PartnersMarquee = () => {
     { src: '/partnerships/workedwith/13.png', alt: 'iMagineLab', url: 'https://imaginelab.club/' },
     { src: '/partnerships/workedwith/16.png', alt: 'Nerdlab', url: 'https://nerdlab.be/' },
     { src: '/partnerships/workedwith/8.png', alt: 'Dwengo', url: 'https://www.dwengo.org/' },
-    { src: '/partnerships/workedwith/4.png', alt: 'Brubotics', url: 'https://brubotics.eu/' },
     { src: '/partnerships/workedwith/3.png', alt: 'WeSTEM', url: 'https://www.westem.eu/' },
     { src: '/partnerships/workedwith/2.png', alt: 'UCLL Techniek- en WetenschapsAcademie (TWA)', url: 'https://www.techniekenwetenschapsacademie.be/' },
     { src: '/partnerships/workedwith/30.png', alt: 'LeRobot', url: 'https://huggingface.co/lerobot' },
