@@ -329,6 +329,17 @@ const rawEvents: EventItem[] = [
     organizationType: "CONTRIBUTED",
     link: "https://www.wintercircus.be/nl/events/id/659",
   },
+  {
+    id: "tectonic-hackathon-antwerp",
+    title: "Tectonic Hackathon · Antwerp",
+    date: "2026-09-30",
+    description: "The Antwerp first round of Belgium's biggest hackathon, hosted at The Vessel. Teams take on real business challenges from KBC, SD Worx, and others, competing for a spot in the final and a €10,000 prize.",
+    thumbnail: "/tectonic-hackathon/cover.png",
+    status: "upcoming",
+    organizationType: "ORGANIZED",
+    link: "https://builderbase.com/event/tectonic-hackathon-antwerp-belgiums-biggest-hackathon",
+    featured: true,
+  },
 ];
 
 const todayISO = new Date().toISOString().slice(0, 10);
